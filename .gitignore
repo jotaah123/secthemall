@@ -1,0 +1,7 @@
+conf/client.pid
+stat/*
+tmp/*
+inc/alias
+inc/apikey
+inc/passphrase
+inc/username
