@@ -114,6 +114,7 @@ if [[ "${CHECKSECTHEMALLCHAINBL}" == "0" ]]; then
 	labelwa; echo " secthemall iptables blacklist does not exists, creating it..."
 	iptables -N secthemall-blacklist
 	iptables -I INPUT -j secthemall-blacklist
+	iptables -I FORWARD -j secthemall-blacklist
 fi
 
 CHECKSECTHEMALLCHAINBL=$(iptables -L -n | grep -i 'Chain' | grep 'secthemall-blacklist' | wc -l)
@@ -129,6 +130,7 @@ if [[ "${CHECKSECTHEMALLCHAINWL}" == "0" ]]; then
 	labelwa; echo " secthemall iptables whitelist does not exists, creating it..."
 	iptables -N secthemall-whitelist
 	iptables -I INPUT -j secthemall-whitelist
+	iptables -I FORWARD -j secthemall-whitelist
 fi
 
 CHECKSECTHEMALLCHAINWL=$(iptables -L -n | grep -i 'Chain' | grep 'secthemall-whitelist' | wc -l)
