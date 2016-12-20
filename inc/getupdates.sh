@@ -61,7 +61,7 @@ for uout in $UPDATESOUT; do
 			if [ $ISIPV4 -ge 1 ]; then
 				CHECKIFIPEXISTS=$(iptables -L secthemall-whitelist -n | grep "${ip}" | wc -l)
 				if [ $CHECKIFIPEXISTS -eq 0 ]; then
-					iptables -I secthemall-whitelist -s ${ip} -j ALLOW
+					iptables -I secthemall-whitelist -s ${ip} -j ACCEPT
 				else
 					labelwa; echo " IPv4 ${ip} already in whitelist."
 				fi
@@ -100,7 +100,7 @@ for uout in $UPDATESOUT; do
 			if [ $ISIPV4 -ge 1 ]; then
 				CHECKIFIPEXISTS=$(iptables -L secthemall-whitelist -n | grep "${ip}" | wc -l)
 				if [ $CHECKIFIPEXISTS -ge 1 ]; then
-					iptables -D secthemall-whitelist -s ${ip} -j ALLOW > /dev/null 2>&1
+					iptables -D secthemall-whitelist -s ${ip} -j ACCEPT > /dev/null 2>&1
 				else
 					labelwa; echo " IPv4 ${ip} not in whitelist."
 				fi
