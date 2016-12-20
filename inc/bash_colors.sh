@@ -179,3 +179,5 @@ function labelin { echo -n "+ "; clr_cyanb  " INFO    " -n; }
 function labelok { echo -n "+ "; clr_greenb " OK      " -n; }
 function labelwa { echo -n "+ "; clr_brownb " WARNING " -n; }
 function labeler { echo -n "+ "; clr_redb   " ERROR   " -n; }
+
+function labelcmd { echo -n "+ "; clr_blueb  " ${1} " -n; }
