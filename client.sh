@@ -69,8 +69,15 @@ if [[ "${1}" == "auth" ]]; then
 	read USERNAME
 	echo -en "Password: "
 	read -s PASSWORD
-	echo -en "\n\nServer alias (example: webserver1): "
+	echo -en "\n\nServer alias, allowed chars [a-zA-Z0-9] and \"-\" (ex: web-server-1): "
 	read SERVERALIAS
+
+	ALIASISOK=$(echo "${SERVERALIAS}" | egrep "^[a-zA-Z0-9\-]+$" | wc -l)
+	if [ $ALIASISOK -lt 1 ]; then
+		echo -en "\n\n"
+		labelwa; echo " Wrong alias format, please use only the following chars: [a-z0-9\\-]"
+		exit 1;
+	fi
 
 	USERID=$(curl -s -d "a=auth&username=${USERNAME}&password=${PASSWORD}&alias=${SERVERALIAS}" 'http://secthemall.com/auth.php')
 	if [[ "${USERID:0:2}" == "ok" ]]; then
