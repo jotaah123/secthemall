@@ -53,18 +53,33 @@ fi
 
 rm -rf ${CDIR}/tmp/*
 
-CHECKSECTHEMALLCHAIN=$(iptables -L -n | grep -i 'Chain' | grep 'secthemall-blacklist' | wc -l)
-if [[ "${CHECKSECTHEMALLCHAIN}" == "0" ]]; then
-	labelwa; echo " secthemall iptables chain does not exists, creating it..."
+CHECKSECTHEMALLCHAINBL=$(iptables -L -n | grep -i 'Chain' | grep 'secthemall-blacklist' | wc -l)
+if [[ "${CHECKSECTHEMALLCHAINBL}" == "0" ]]; then
+	labelwa; echo " secthemall iptables blacklist does not exists, creating it..."
 	iptables -N secthemall-blacklist
 	iptables -I INPUT -j secthemall-blacklist
 fi
 
-CHECKSECTHEMALLCHAIN=$(iptables -L -n | grep -i 'Chain' | grep 'secthemall-blacklist' | wc -l)
-if [[ "${CHECKSECTHEMALLCHAIN}" == "1" ]]; then
+CHECKSECTHEMALLCHAINBL=$(iptables -L -n | grep -i 'Chain' | grep 'secthemall-blacklist' | wc -l)
+if [[ "${CHECKSECTHEMALLCHAINBL}" == "1" ]]; then
 	labelok; echo " iptables chain secthemall-blacklist exists."
 else
 	labeler; echo " unable to create secthemall-blacklist chain."
+	exit 1
+fi
+
+CHECKSECTHEMALLCHAINWL=$(iptables -L -n | grep -i 'Chain' | grep 'secthemall-whitelist' | wc -l)
+if [[ "${CHECKSECTHEMALLCHAINWL}" == "0" ]]; then
+	labelwa; echo " secthemall iptables whitelist does not exists, creating it..."
+	iptables -N secthemall-whitelist
+	iptables -I INPUT -j secthemall-whitelist
+fi
+
+CHECKSECTHEMALLCHAINWL=$(iptables -L -n | grep -i 'Chain' | grep 'secthemall-whitelist' | wc -l)
+if [[ "${CHECKSECTHEMALLCHAINWL}" == "1" ]]; then
+	labelok; echo " iptables chain secthemall-whitelist exists."
+else
+	labeler; echo " unable to create secthemall-whitelist chain."
 	exit 1
 fi
 

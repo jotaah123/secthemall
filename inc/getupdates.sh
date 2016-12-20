@@ -37,26 +37,73 @@ for uout in $UPDATESOUT; do
 		ADDIPLIST=$(echo "${uout:8}" | tr "|" "\n")
 
 		for ip in $ADDIPLIST; do
-			CHECKIFIPEXISTS=$(iptables -L secthemall-blacklist -n | grep "${ip}" | wc -l)
-			if [ $CHECKIFIPEXISTS -eq 0 ]; then
-				iptables -I secthemall-blacklist -s ${ip} -j DROP
-			else
-				labelwa; echo " IPv4 ${ip} already in blacklist."
+			ISIPV4=$(echo "${ip}" | egrep "^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+(\/[0-9]+|)$" | wc -l)
+
+			if [ $ISIPV4 -ge 1 ]; then
+				CHECKIFIPEXISTS=$(iptables -L secthemall-blacklist -n | grep "${ip}" | wc -l)
+				if [ $CHECKIFIPEXISTS -eq 0 ]; then
+					iptables -I secthemall-blacklist -s ${ip} -j DROP
+				else
+					labelwa; echo " IPv4 ${ip} already in blacklist."
+				fi
+			fi
+		done
+	fi
+
+	if [[ "${uout:0:8}" == "+wlipv4:" ]]; then
+		labelin; echo " Add following IPv4 in whitelist: ${uout:8}"
+
+		ADDIPLIST=$(echo "${uout:8}" | tr "|" "\n")
+
+		for ip in $ADDIPLIST; do
+			ISIPV4=$(echo "${ip}" | egrep "^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+(\/[0-9]+|)$" | wc -l)
+
+			if [ $ISIPV4 -ge 1 ]; then
+				CHECKIFIPEXISTS=$(iptables -L secthemall-whitelist -n | grep "${ip}" | wc -l)
+				if [ $CHECKIFIPEXISTS -eq 0 ]; then
+					iptables -I secthemall-whitelist -s ${ip} -j ALLOW
+				else
+					labelwa; echo " IPv4 ${ip} already in whitelist."
+				fi
 			fi
 		done
 	fi
 
 	if [[ "${uout:0:8}" == "-blipv4:" ]]; then
-		labelin; echo " Remove following IPv4 in blacklist: ${uout:8}"
+		labelin; echo " Remove following IPv4 from blacklist: ${uout:8}"
 
 		ADDIPLIST=$(echo "${uout:8}" | tr "|" "\n")
 
 		for ip in $ADDIPLIST; do
-			CHECKIFIPEXISTS=$(iptables -L secthemall-blacklist -n | grep "${ip}" | wc -l)
-			if [ $CHECKIFIPEXISTS -ge 1 ]; then
-				iptables -D secthemall-blacklist -s ${ip} -j DROP > /dev/null 2>&1
-			else
-				labelwa; echo " IPv4 ${ip} not in blacklist."
+			ISIPV4=$(echo "${ip}" | egrep "^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+(\/[0-9]+|)$" | wc -l)
+
+			if [ $ISIPV4 -ge 1 ]; then
+				CHECKIFIPEXISTS=$(iptables -L secthemall-blacklist -n | grep "${ip}" | wc -l)
+				if [ $CHECKIFIPEXISTS -ge 1 ]; then
+					iptables -D secthemall-blacklist -s ${ip} -j DROP > /dev/null 2>&1
+				else
+					labelwa; echo " IPv4 ${ip} does not seem to be blacklisted, trying to remove it anyway."
+					iptables -D secthemall-blacklist -s ${ip} -j DROP > /dev/null 2>&1
+				fi
+			fi
+		done
+	fi
+
+	if [[ "${uout:0:8}" == "-wlipv4:" ]]; then
+		labelin; echo " Remove following IPv4 from whitelist: ${uout:8}"
+
+		ADDIPLIST=$(echo "${uout:8}" | tr "|" "\n")
+
+		for ip in $ADDIPLIST; do
+			ISIPV4=$(echo "${ip}" | egrep "^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+(\/[0-9]+|)$" | wc -l)
+
+			if [ $ISIPV4 -ge 1 ]; then
+				CHECKIFIPEXISTS=$(iptables -L secthemall-whitelist -n | grep "${ip}" | wc -l)
+				if [ $CHECKIFIPEXISTS -ge 1 ]; then
+					iptables -D secthemall-whitelist -s ${ip} -j ALLOW > /dev/null 2>&1
+				else
+					labelwa; echo " IPv4 ${ip} not in whitelist."
+				fi
 			fi
 		done
 	fi

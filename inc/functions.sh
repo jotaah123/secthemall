@@ -52,8 +52,15 @@ function parselog {
 
 	cat ${1} | egrep "${2}" > ${CDIR}/../stat/s${logfile//\//_}
 
+	NUMLINETOSEND=$(cat ${CDIR}/../tmp/t${logfile//\//_} | wc -l)
+
+	labelin; echo " Encrypting new logs before send (${NUMLINETOSEND})..."
+
 	encstring=$(sdash_encrypt ${CDIR}/../tmp/t${logfile//\//_})
 	echo -en "logs=${encstring}" > ${CDIR}/../tmp/e${logfile//\//_}
+
+	#echo -en "\n\nFILE TO SEND: "; cat ${CDIR}/../tmp/e${logfile//\//_}
+
 	USERNAME=$(cat ${CDIR}/username)
 	APIKEY=$(cat ${CDIR}/apikey)
 	SALIAS=$(cat ${CDIR}/alias)
@@ -63,7 +70,7 @@ function parselog {
 		exit 0
 	fi
 
-	curl -d "a=writelogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&type=${3}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" -d @${CDIR}/../tmp/e${logfile//\//_} "http://localhost/api/v1/"
+	curl -s -d "a=writelogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&type=${3}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" -d @${CDIR}/../tmp/e${logfile//\//_} "http://secthemall.com/api/v1/"
 	labelok; echo -n " Logs sent for file "; clr_blue "${logfile}"
 	rm -rf ${CDIR}/../tmp/t${logfile//\//_}
 	rm -rf ${CDIR}/../tmp/e${logfile//\//_}
