@@ -53,6 +53,55 @@ fi
 
 rm -rf ${CDIR}/tmp/*
 
+if [[ "${1}" != "auth" ]]; then
+	if [ ! -f "${CDIR}/inc/passphrase" ] && [ ! -f "${CDIR}/passphrase" ]; then
+		labelwa; echo " Passphrase not found, please visit https://secthemall.com/user"
+		labelwa; echo -n " If you already have a Username and a Password, run: "; clr_green "${0} auth"
+		echo "+"
+		exit 1;
+	fi
+fi
+
+if [[ "${1}" == "auth" ]]; then
+	echo -e "\nAuthentication:"
+	echo -e "Insert your secthemall.com Username and Password\n"
+	echo -en "Username: "
+	read USERNAME
+	echo -en "Password: "
+	read -s PASSWORD
+	echo -en "\n\nServer alias (example: webserver1): "
+	read SERVERALIAS
+
+	USERID=$(curl -s -d "a=auth&username=${USERNAME}&password=${PASSWORD}&alias=${SERVERALIAS}" 'http://secthemall.com/auth.php')
+	if [[ "${USERID:0:2}" == "ok" ]]; then
+		echo -n ${USERID:3:64} > ${CDIR}/inc/passphrase
+		echo -n ${USERID:74} > ${CDIR}/inc/apikey
+		echo -n ${USERNAME} > ${CDIR}/inc/username
+		echo -n ${SERVERALIAS} > ${CDIR}/inc/alias
+		echo -e "\n\n"
+		labelok; echo " passphrase saved in ${CDIR}/inc/passphrase"
+		labelok; echo " Now you can run ./client.sh"
+		exit 0;
+	else
+		echo -e "\n"
+		labeler; echo " Username or Password wrong. Please check your credentials and try again."
+		exit 1;
+	fi
+fi
+
+if [ -f /etc/timezone ]; then
+	TIMEZONE=$(cat /etc/timezone)
+	DATEANDTIME=$(date)
+	labelin; echo " Current Timezone for this node is: ${TIMEZONE}"
+	labelin; echo " Current date and time: ${DATEANDTIME}"
+	echo "+"
+else
+	labeler; echo " No Time Zone found in /etc/timezone."
+	echo "+"
+	exit 1
+fi
+
+
 CHECKSECTHEMALLCHAINBL=$(iptables -L -n | grep -i 'Chain' | grep 'secthemall-blacklist' | wc -l)
 if [[ "${CHECKSECTHEMALLCHAINBL}" == "0" ]]; then
 	labelwa; echo " secthemall iptables blacklist does not exists, creating it..."
@@ -81,34 +130,6 @@ if [[ "${CHECKSECTHEMALLCHAINWL}" == "1" ]]; then
 else
 	labeler; echo " unable to create secthemall-whitelist chain."
 	exit 1
-fi
-
-if [[ "${1}" == "auth" ]]; then
-	echo -e "\nAuthentication:"
-	echo -e "Insert your secthemall.com Username and Password\n"
-	echo -en "Username: "
-	read USERNAME
-	echo -en "Password: "
-	read -s PASSWORD
-	echo -en "\n\nServer alias (example: webserver1): "
-	read SERVERALIAS
-
-	USERID=$(curl -s -d "a=auth&username=${USERNAME}&password=${PASSWORD}&alias=${SERVERALIAS}" 'http://secthemall.com/auth.php')
-	if [[ "${USERID:0:2}" == "ok" ]]; then
-		echo -n ${USERID:3:64} > ${CDIR}/inc/passphrase
-		echo -n ${USERID:74} > ${CDIR}/inc/apikey
-		echo -n ${USERNAME} > ${CDIR}/inc/username
-		echo -n ${SERVERALIAS} > ${CDIR}/inc/alias
-		echo -e "\n\n"
-		labelok; echo " passphrase saved in ${CDIR}/inc/passphrase"
-		labelok; echo " You can change the server alias by editing ${CDIR}/inc/alias"
-		labelok; echo " Now you can run ./client.sh"
-		exit 0;
-	else
-		echo -e "\n"
-		labeler; echo " Username or Password wrong. Please check your credentials and try again."
-		exit 1;
-	fi
 fi
 
 ${CDIR}/inc/getblacklist.sh
