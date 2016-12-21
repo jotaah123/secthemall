@@ -1,10 +1,23 @@
 #!/bin/bash
 
 CDIR="$( cd "$( dirname "$0" )" && pwd )"
+USERNAME=$(cat ${CDIR}/inc/username)
+APIKEY=$(cat ${CDIR}/inc/apikey)
+SALIAS=$(cat ${CDIR}/inc/alias)
+STAVERSION="secthemall/1.0.6"
+
 source ${CDIR}/inc/bash_colors.sh
 
 LASTPID=$(cat ${CDIR}/conf/client.pid)
 RUNME=0
+
+if [ -f /etc/timezone ]; then
+	TIMEZONE=$(cat /etc/timezone)
+else
+	labeler; echo " No Time Zone found in /etc/timezone."
+	echo "+"
+	exit 1
+fi
 
 ARGREXHELP=$(echo "$@" | egrep "(\-\-help|\-h)" | wc -l)
 if [ $ARGREXHELP -ge 1 ]; then
@@ -20,8 +33,10 @@ if [ $ARGREXHELP -ge 1 ]; then
 	echo "+"
 	labelcmd "--gbladd <ip>"; echo "      Add <ip> to your Global Blacklist"
 	labelcmd "--gbldel <ip>"; echo "      Delete <ip> to your Global Blacklist"
+	labelcmd "--gblshow"; echo "          Show your Global Blacklist (json)"
 	labelcmd "--gwladd <ip>"; echo "      Add <ip> to your Global Whitelist"
 	labelcmd "--gwldel <ip>"; echo "      Delete <ip> to your Global Whitelist"
+	labelcmd "--gwlshow"; echo "          Show your Global Whitelist (json)"
 	echo "+"
 	echo -en "\n\n Example usage:\n"
 	echo " ${0} --start -b         # this will start the client in background"
@@ -32,6 +47,28 @@ if [ $ARGREXHELP -ge 1 ]; then
 	exit 0
 fi
 
+
+GBLADD=$(echo "$@" | egrep -o "\-\-gbladd ([0-9\.]+|[0-9a-fA-F]+\:[0-9a-fA-F\:]+)(\/[0-9]+|)" | wc -l)
+if [ $GBLADD -ge 1 ]; then
+	IP=$(echo "$@" | egrep -o "([0-9\.]+|[0-9a-fA-F]+\:[0-9a-fA-F\:]+)(\/[0-9]+|)")
+	labelin; echo -n " Sending "; clr_blueb "${IP}" -n; echo " to Global Blacklist..."
+	curl -A "${STAVERSION}" -d "a=gbl&action=add&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&alias=${SALIAS}&ip=${IP}" "https://secthemall.com/api/v1/"
+	exit 0
+fi
+
+GBLDEL=$(echo "$@" | egrep -o "\-\-gbldel ([0-9\.]+|[0-9a-fA-F]+\:[0-9a-fA-F\:]+)(\/[0-9]+|)" | wc -l)
+if [ $GBLDEL -ge 1 ]; then
+	IP=$(echo "$@" | egrep -o "([0-9\.]+|[0-9a-fA-F]+\:[0-9a-fA-F\:]+)(\/[0-9]+|)")
+	labelin; echo -n " Removing "; clr_blueb "${IP}" -n; echo " from Global Blacklist..."
+	curl -A "${STAVERSION}" -d "a=gbl&action=del&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&alias=${SALIAS}&ip=${IP}" "https://secthemall.com/api/v1/"
+	exit 0
+fi
+
+GBLSHOW=$(echo "$@" | egrep -o "\-\-gblshow" | wc -l)
+if [ $GBLSHOW -ge 1 ]; then
+	curl -s -A "${STAVERSION}" -d "a=gblshow&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}" "https://secthemall.com/api/v1/"
+	exit 0
+fi
 
 CLIENTISRUNNING=$(ps aux | grep "${LASTPID}" | grep -v grep | wc -l)
 

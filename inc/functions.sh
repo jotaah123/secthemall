@@ -70,7 +70,7 @@ function parselog {
 		exit 0
 	fi
 
-	curl -s -d "a=writelogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&type=${3}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" -d @${CDIR}/../tmp/e${logfile//\//_} "http://secthemall.com/api/v1/"
+	curl -s -d "a=writelogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&type=${3}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" -d @${CDIR}/../tmp/e${logfile//\//_} "https://secthemall.com/api/v1/"
 	labelok; echo -n " Logs sent for file "; clr_blue "${logfile}"
 	rm -rf ${CDIR}/../tmp/t${logfile//\//_}
 	rm -rf ${CDIR}/../tmp/e${logfile//\//_}
@@ -100,7 +100,7 @@ function parsecmd {
 		exit 0
 	fi
 
-	curl -d "a=writelogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&type=${3}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" -d @${CDIR}/../tmp/e${logfile//\//_} "http://localhost/api/v1/"
+	curl -d "a=writelogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&type=${3}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" -d @${CDIR}/../tmp/e${logfile//\//_} "https://secthemall.com/api/v1/"
 	labelok; echo -n " Logs sent for file "; clr_blue "${logfile}"
 	rm -rf ${CDIR}/../tmp/t${logfile//\//_}
 	rm -rf ${CDIR}/../tmp/e${logfile//\//_}
@@ -113,7 +113,7 @@ function getblacklist {
 
 	iptables -F secthemall-blacklist
 
-	GETBLACKLIST=$(curl -s -d "a=getmyblacklist&ipversion=ipv4&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" "http://secthemall.com/api/v1/")
+	GETBLACKLIST=$(curl -s -d "a=getmyblacklist&ipversion=ipv4&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" "https://secthemall.com/api/v1/")
 
 	for ip in $GETBLACKLIST; do
 		iptables -I secthemall-blacklist -s ${ip} -j DROP

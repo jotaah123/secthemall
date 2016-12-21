@@ -16,7 +16,7 @@ SYSUPTIME=$(uptime | base64 -w0)
 SYSISSUE=$(cat /etc/issue | grep '\w' | base64 -w0)
 SYSUNAME=$(uname -a | base64 -w0)
 
-UPDATESOUT=$(curl -s -A "${STAVERSION}" -d "a=updates&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&alias=${SALIAS}&myhostname=${MYHOSTNAME}&myipaddr=${MYIPADDR}&uptime=${SYSUPTIME}&issue=${SYSISSUE}&uname=${SYSUNAME}" 'http://secthemall.com/api/v1/')
+UPDATESOUT=$(curl -s -A "${STAVERSION}" -d "a=updates&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&alias=${SALIAS}&myhostname=${MYHOSTNAME}&myipaddr=${MYIPADDR}&uptime=${SYSUPTIME}&issue=${SYSISSUE}&uname=${SYSUNAME}" 'https://secthemall.com/api/v1/')
 
 UCOUNT=1
 for uout in $UPDATESOUT; do
