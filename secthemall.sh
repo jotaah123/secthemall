@@ -38,6 +38,8 @@ if [ $ARGREXHELP -ge 1 ]; then
 	labelcmd "--gwldel <ip>"; echo "      Delete <ip> to your Global Whitelist"
 	labelcmd "--gwlshow"; echo "          Show your Global Whitelist (json)"
 	echo "+"
+	labelcmd "--getlogs [\-q]"; echo "    Get collected logs from your nodes (json)"
+	echo "+"
 	echo -en "\n\n Example usage:\n"
 	echo " ${0} --start -b         # this will start the client in background"
 	echo " ${0} --restart          # this will restart the client in background"
@@ -47,6 +49,14 @@ if [ $ARGREXHELP -ge 1 ]; then
 	exit 0
 fi
 
+
+GETLOG=$(echo "$@" | egrep -o "\-\-getlogs \-q (.+)" | wc -l)
+if [ $GETLOG -ge 1 ]; then
+	QUERY=$(echo "$@" | egrep -o "(f\[.+)")
+	curl -A "${STAVERSION}" -s -d "a=getlogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&${QUERY}" "https://secthemall.com/api/v1/"
+	echo ""
+	exit 0
+fi
 
 GBLADD=$(echo "$@" | egrep -o "\-\-gbladd ([0-9\.]+|[0-9a-fA-F]+\:[0-9a-fA-F\:]+)(\/[0-9]+|)" | wc -l)
 if [ $GBLADD -ge 1 ]; then
