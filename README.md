@@ -48,7 +48,7 @@ With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerabilit
 asdasd
 
 ## Requirements
-Keep in mind that SECTHEMALL is centrally orchestrated, so you need to create an account on secthemall.com but don't worry... 
+Keep in mind that SECTHEMALL is centrally orchestrated, so you need to create a **free** account on secthemall.com but don't worry... 
 it takes just few seconds! The registration need only your e-mail address, secthemall.com do the rest.
 
 The first time you run the `secthemall.sh` script, it check if all required components are present.
