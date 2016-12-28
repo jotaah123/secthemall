@@ -38,7 +38,11 @@ if [ $ARGREXHELP -ge 1 ]; then
 	labelcmd "--gwldel <ip>"; echo "      Delete <ip> to your Global Whitelist"
 	labelcmd "--gwlshow"; echo "          Show your Global Whitelist (json)"
 	echo "+"
-	labelcmd "--getlogs [\-q]"; echo "    Get collected logs from your nodes (json)"
+	labelcmd "--lblshow"; echo "          Show your Local Blacklist (iptables)"
+	labelcmd "--lwlshow"; echo "          Show your Local Whitelist (iptables)"
+	echo "+"
+
+	labelcmd "--getlogs [-q ...]"; echo " Get collected logs from your nodes (json)"
 	echo "+"
 	echo -en "\n\n Example usage:\n"
 	echo " ${0} --start -b         # this will start the client in background"
@@ -77,6 +81,18 @@ fi
 GBLSHOW=$(echo "$@" | egrep -o "\-\-gblshow" | wc -l)
 if [ $GBLSHOW -ge 1 ]; then
 	curl -s -A "${STAVERSION}" -d "a=gblshow&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}" "https://secthemall.com/api/v1/"
+	exit 0
+fi
+
+LBLSHOW=$(echo "$@" | egrep -o "\-\-lblshow" | wc -l)
+if [ $LBLSHOW -ge 1 ]; then
+	iptables -L secthemall-blacklist -n
+	exit 0
+fi
+
+LWLSHOW=$(echo "$@" | egrep -o "\-\-lwlshow" | wc -l)
+if [ $LWLSHOW -ge 1 ]; then
+	iptables -L secthemall-whitelist -n
 	exit 0
 fi
 

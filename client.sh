@@ -157,9 +157,18 @@ while true; do
 			${CDIR}/inc/parser.sh "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[3]}"
 		fi
 
-		REGEXPCMD='^(\*[^[:space:]]+.*) \"(.+)\" \"(.+)\" \"(.+)\"$'
+		#REGEXPCMD='^(\*[^[:space:]]+.*) \"(.+)\" \"(.+)\" \"(.+)\"$'
+		#if [[ ${line} =~ $REGEXPCMD ]]; then
+			# ${CDIR}/inc/cmdout.sh "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[3]}" "${BASH_REMATCH[4]}"
+		#fi
+
+		REGEXPCMD='^cmd \"(.+)\" \"(.+)\" \"(.+)\"$'
 		if [[ ${line} =~ $REGEXPCMD ]]; then
-			${CDIR}/inc/cmdout.sh "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[3]}" "${BASH_REMATCH[4]}"
+			# ${CDIR}/inc/cmdout.sh "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[3]}" "${BASH_REMATCH[4]}"
+			#echo "--> Execute cmd with type ${BASH_REMATCH[1]}"
+			#echo "--> with stat ${BASH_REMATCH[2]}"
+			#echo "--> exec: ${BASH_REMATCH[3]}"
+			${CDIR}/inc/cmdout.sh "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[3]}"
 		fi
 	done <${CDIR}/conf/parser.conf
 

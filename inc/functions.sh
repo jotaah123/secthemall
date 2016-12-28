@@ -77,17 +77,21 @@ function parselog {
 }
 
 function parsecmd {
-	logfile=$4
+	#logfile=$4
 
-	echo "`$1`" | egrep "${2}" | diff ${CDIR}/../stat/s${logfile//\//_} - | egrep "${2}"
+	logptye="${2}"
+	logfile="${3}"
+	cmdstring="${4}"
+
+	#echo "`$cmdstring`" | diff ${CDIR}/../stat/s${logfile//\//_} -
 
 	if [ -f ${CDIR}/../stat/s${logfile//\//_} ]; then
-		echo "`$1`" | egrep "${2}" | diff ${CDIR}/../stat/s${logfile//\//_} - | egrep "${2}" > ${CDIR}/../tmp/t${logfile//\//_}
+		echo "`$cmdstring`" | diff ${CDIR}/../stat/s${logfile//\//_} - > ${CDIR}/../tmp/t${logfile//\//_}
 	else
-		echo "`$1`" | egrep "${2}" > ${CDIR}/../tmp/t${logfile//\//_}
+		echo "`$cmdstring`" > ${CDIR}/../tmp/t${logfile//\//_}
 	fi
 
-	echo "`$1`" | egrep "${2}" > ${CDIR}/../stat/s${logfile//\//_}
+	echo "`$cmdstring`" > ${CDIR}/../stat/s${logfile//\//_}
 
 	encstring=$(sdash_encrypt ${CDIR}/../tmp/t${logfile//\//_})
 	echo -en "logs=${encstring}" > ${CDIR}/../tmp/e${logfile//\//_}
@@ -95,12 +99,12 @@ function parsecmd {
 	APIKEY=$(cat ${CDIR}/apikey)
 	SALIAS=$(cat ${CDIR}/alias)
 
-	if [[ "${5}" == "firstime" ]]; then
+	if [[ "${1}" == "firstime" ]]; then
 		labelin; echo " Skip sendlog for command ${logfile} (only for first time)."
 		exit 0
 	fi
 
-	curl -d "a=writelogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&type=${3}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" -d @${CDIR}/../tmp/e${logfile//\//_} "https://secthemall.com/api/v1/"
+	curl -d "a=writelogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&type=${logptye}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" -d @${CDIR}/../tmp/e${logfile//\//_} "https://secthemall.com/api/v1/"
 	labelok; echo -n " Logs sent for file "; clr_blue "${logfile}"
 	rm -rf ${CDIR}/../tmp/t${logfile//\//_}
 	rm -rf ${CDIR}/../tmp/e${logfile//\//_}
