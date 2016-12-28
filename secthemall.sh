@@ -1,13 +1,19 @@
 #!/bin/bash
 
 CDIR="$( cd "$( dirname "$0" )" && pwd )"
+source ${CDIR}/inc/bash_colors.sh
+STAVERSION="secthemall/1.0.6"
+
+if [ ! -f ${CDIR}/inc/username ]; then
+	labeler; echo " No username found."
+	labelin; echo -n " You can get a free account here: "; clr_blueb "https://secthemall.com/user"
+	${CDIR}/client.sh auth
+	exit 0;
+fi
+
 USERNAME=$(cat ${CDIR}/inc/username)
 APIKEY=$(cat ${CDIR}/inc/apikey)
 SALIAS=$(cat ${CDIR}/inc/alias)
-STAVERSION="secthemall/1.0.6"
-
-source ${CDIR}/inc/bash_colors.sh
-
 LASTPID=$(cat ${CDIR}/conf/client.pid)
 RUNME=0
 
