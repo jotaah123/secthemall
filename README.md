@@ -8,7 +8,10 @@ With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerabilit
 - Requirements
 - Installation
 
-## How the client work
+## How it work
+![how it work](https://secthemall.com/img/secthemall-client-howitwork.001.jpeg)
+
+### How the client work
 ```sh
 # ./secthemall.sh -h
 +
@@ -47,18 +50,22 @@ With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerabilit
 ### Using --start --stop --restart
 asdasd
 
+
+
+
+
 ## Requirements
 Keep in mind that SECTHEMALL is centrally orchestrated, so you need to create a **free** account on secthemall.com but don't worry... 
 it takes just few seconds! The registration need only your e-mail address, secthemall.com do the rest.
 
 The first time you run the `secthemall.sh` script, it check if all required components are present.
 The secthemall client need:
-```sh
-	openssl
-	iptables
-	curl
-	base64
-```
+- openssl
+- iptables
+- curl
+- base64
 
 
+
+## Thanks to
 thanks to @maxtsepkov for [bash_colors](https://github.com/maxtsepkov/bash_colors)
