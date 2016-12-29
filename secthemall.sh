@@ -11,6 +11,12 @@ if [ ! -f ${CDIR}/inc/username ]; then
 	exit 0;
 fi
 
+AUTHME=$(echo "$@" | egrep -o "\-\-auth" | wc -l)
+if [ $AUTHME -ge 1 ]; then
+	${CDIR}/client.sh auth
+	exit 0;
+fi
+
 USERNAME=$(cat ${CDIR}/inc/username)
 APIKEY=$(cat ${CDIR}/inc/apikey)
 SALIAS=$(cat ${CDIR}/inc/alias)
@@ -32,6 +38,7 @@ if [ $ARGREXHELP -ge 1 ]; then
 	echo "+"
 
 	labelcmd "--help or -h"; echo "       Show this help"
+	labelcmd "--auth"; echo "             Authenticate with your username and pasword"
 	labelcmd "--start"; echo "            Run client in foreground"
 	labelcmd "--background or -b"; echo " Run client in background"
 	labelcmd "--stop"; echo "             Stop client"

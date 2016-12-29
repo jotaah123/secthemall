@@ -6,6 +6,8 @@ With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerabilit
 ## Index
 - How it works
   - How the client works
+  - Authentication
+  - Run the secthemall.sh client
   - Read from file
   - Read command output
   - Cloud Correlation Rules
@@ -39,6 +41,7 @@ It encrypts all collected events using a unique passphrase generated at the firs
 + (::) SECTHEMALL
 +
 +  --help or -h        Show this help
++  --auth              Authenticate with your username and pasword
 +  --start             Run client in foreground
 +  --background or -b  Run client in background
 +  --stop              Stop client
@@ -66,9 +69,30 @@ It encrypts all collected events using a unique passphrase generated at the firs
 
 ```
 
-### First: Authentication
+### Authentication
+Once you have successfully completed the registration, the first time you run the client it will ask you to enter your username, password and the server alias.
+The server alias is a name (or a label) that you choose which the client will assign to all collected events.
+The alias can be, for example, something like "my-webserver" or "database1" or "my-application-node1".
 
-### Using --start --stop --restart
+```sh
+# ./secthemall.sh --auth
++
++ (::) SECTHEMALL
++
++  INFO     Initializing Security Dashboard client on /usr/local/secthemall
++  INFO     With PID 1337 saved in /usr/local/secthemall/conf/client.pid
++
+
+Authentication:
+Insert your secthemall.com Username and Password
+
+Username: themiddle@secthemall.com
+Password: *********
+
+Server alias, allowed chars [a-zA-Z0-9] and \"-\" (ex: web-server-1): mywebsite-node1
+```
+
+### Run the secthemall.sh client
 asdasd
 
 
