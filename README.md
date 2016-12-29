@@ -4,7 +4,7 @@ It can store your logs to the SECTHEMALL cloud and make you able to create **cor
 With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerability Scan**, and more...
 
 ## Index
-- How it works
+- [How it works](#how-it-works)
   - How the client works
   - Authentication
   - Run the secthemall.sh client
