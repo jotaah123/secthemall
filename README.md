@@ -5,11 +5,27 @@ With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerabilit
 
 ## Index
 - How it work
+  - Read from file
+  - Read command output
+  - Cloud Correlation Rules
+  - Block an IP to all your servers
+  - Sync a server blacklist
 - Requirements
 - Installation
 
 ## How it work
 ![how it work](https://secthemall.com/img/secthemall-client-howitwork.001.jpeg)
+secthemall is a bash script that can read a log file, or the output of a command, and set an iptables rule.
+For example, it could reads your `/var/log/auth.log` and block an IP address that fails the ssh authentication for more then 6 times,
+or it could read the `access.log` of your nginx server and block an IP address that get more then 20 "page not found" errors.
+
+Each blocked IP address (IPv4 or IPv6) is added to an iptables rules chain and blocked (something like iptables -s <ipv4> -j DROP).
+All blocked IPs will be sent to your global blacklist on secthemall.com and distributed on all your servers that run the secthemall.sh script.
+Imagine that you have 3 linux server: a brute force attack blocked on the server A will be automatically blocked on servers B and C.
+
+You can get a free account on secthemall.com in a few seconds, and start to use the secthemall.sh client.
+You can see all your servers events on the secthemall online dashboard, where you can add or remove IP from your global black or white list.
+You can also get graphical reports, create correlation rules, get notified by e-mail or telegram when an IP went in blackist, etc...
 
 ### How the client work
 ```sh
