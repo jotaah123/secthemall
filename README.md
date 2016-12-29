@@ -93,6 +93,8 @@ Server alias, allowed chars [a-zA-Z0-9] and \"-\" (ex: web-server-1): mywebsite-
 ```
 
 ### Run the secthemall.sh client
+[![asciicast](https://asciinema.org/a/1rpn93kcmmixwsndaf9jlud6d.png)](https://asciinema.org/a/1rpn93kcmmixwsndaf9jlud6d)
+
 asdasd
 
 

@@ -87,7 +87,7 @@ if [[ "${1}" == "auth" ]]; then
 		echo -n ${SERVERALIAS} > ${CDIR}/inc/alias
 		echo -e "\n\n"
 		labelok; echo " passphrase saved in ${CDIR}/inc/passphrase"
-		labelok; echo " Now you can run ./client.sh"
+		labelok; echo " Now you can run ./secthemall.sh"
 		exit 0;
 	else
 		echo -e "\n"
