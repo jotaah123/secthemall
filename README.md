@@ -99,7 +99,19 @@ Server alias, allowed chars [a-zA-Z0-9] and \"-\" (ex: web-server-1): mywebsite-
 
 
 ### Configuration
+`secthemall.sh` needs to be configured to collect events from log files or commands output.
+Just edit the file `conf/parser.conf` and follow the instructions inside it. For example:
 
+```sh
+# this will parse logs in the auth.log with type SSH
+/var/log/auth.log ".*sshd.*password.*" "SSH"
+
+# this will read the output of "/bin/netstat -ltunp" command
+cmd "netstat" "mynetstat" "/bin/netstat -ltunp"
+
+# this will read the access.log inside a docker container
+cmd "nginx_access" "my-webserver" "docker exec -t mycontainer grep 404 /usr/local/nginx/logs/access.log"
+```
 
 
 
