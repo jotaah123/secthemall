@@ -8,6 +8,7 @@ With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerabilit
   - How the client works
   - Authentication
   - Run the secthemall.sh client
+  - Configuration
   - Read from file
   - Read command output
   - Cloud Correlation Rules
@@ -92,10 +93,13 @@ Password: *********
 Server alias, allowed chars [a-zA-Z0-9] and \"-\" (ex: web-server-1): mywebsite-node1
 ```
 
+
 ### Run the secthemall.sh client
 [![asciicast](https://asciinema.org/a/1rpn93kcmmixwsndaf9jlud6d.png)](https://asciinema.org/a/1rpn93kcmmixwsndaf9jlud6d)
 
-asdasd
+
+### Configuration
+
 
 
 
