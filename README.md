@@ -5,8 +5,8 @@ With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerabilit
 
 ## Index
 - [How it works](#how-it-works)
-  - How the client works
-  - Authentication
+  - [How the client works](#how-the-client-works)
+  - [Authentication](#authentication)
   - Run the secthemall.sh client
   - Configuration
   - Read from file
@@ -35,7 +35,7 @@ You can also get graphical reports, create correlation rules, get notified by e-
 `secthemall.sh` needs OpenSSL to encrypt your events before send them to the secthemall cloud.
 It encrypts all collected events using a unique passphrase generated at the first authentication.
 
-### How the client work
+### How the client works
 ```sh
 # ./secthemall.sh -h
 +
