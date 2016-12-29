@@ -17,7 +17,7 @@ With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerabilit
 - Requirements
 - Installation
 
-## How it work
+## How it works
 ![how it work](https://secthemall.com/img/secthemall-client-howitwork.001.jpeg)
 
 secthemall is a bash script that can read a log file, or the output of a command, and set an iptables rule.
