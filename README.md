@@ -7,8 +7,9 @@ With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerabilit
 - [How it works](#how-it-works)
   - [How the client works](#how-the-client-works)
   - [Authentication](#authentication)
-  - Run the secthemall.sh client
-  - Configuration
+  - [Run the secthemall.sh client](#run-the-secthemallsh-client)
+  - [Configuration](#configuration)
+  - [Autoconfig](#autoconfig)
   - Read from file
   - Read command output
   - Cloud Correlation Rules
@@ -90,7 +91,7 @@ Insert your secthemall.com Username and Password
 Username: themiddle@secthemall.com
 Password: *********
 
-Server alias, allowed chars [a-zA-Z0-9] and \"-\" (ex: web-server-1): mywebsite-node1
+Server alias, allowed chars [a-zA-Z0-9] and "-" (ex: web-server-1): mywebsite-node1
 ```
 
 
@@ -114,6 +115,24 @@ cmd "nginx_access" "my-webserver" "docker exec -t mycontainer grep 404 /usr/loca
 ```
 
 
+
+### Autoconfig
+If you want a quick-and-dirty configuration, you could use the `--autoconf` parameter:
+```sh
+# ./secthemall.sh --autoconf
++ [ INFO   ] Trying to find intresting log files...
+
+# copy under this line and paste in conf/parser.conf
+# --------------------------------------------------
+/var/log/auth.log "sshd.*password.*" "SSH"
+/var/log/kern.log "MAC.+SRC.+DST.+PROTO.+DPT" "iptables"
+/var/log/ufw.log "MAC.+SRC.+DST.+PROTO.+DPT" "iptables"
+/var/log/nginx/access.log "HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} " "nginx_access"
+cmd "netstat" "netstat_listen" "/bin/netstat -ltunp"
+# --------------------------------------------------
+```
+In this case, the client will look for any interesting log files that could contain ssh logs, web server logs, iptables logs and more.
+It will suggest you a configuration that you can put in `conf/parser.conf` and start to collect events.
 
 
 
