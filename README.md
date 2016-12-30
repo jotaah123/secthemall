@@ -12,9 +12,11 @@ With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerabilit
   - [Autoconfig](#autoconfig)
   - Read from file
   - Read command output
-  - Cloud Correlation Rules
+- Blacklist
   - Block an IP to all your servers
   - Sync a server blacklist
+- Cloud
+  - Correlation Rules
 - Requirements
 - Installation
 
@@ -131,9 +133,19 @@ If you want a quick-and-dirty configuration, you could use the `--autoconf` para
 cmd "netstat" "netstat_listen" "/bin/netstat -ltunp"
 # --------------------------------------------------
 ```
-In this case, the client will look for any interesting log files that could contain ssh logs, web server logs, iptables logs and more.
+In this case, the client will look for any interesting log file that could contain ssh logs, web server logs, iptables logs and more.
 It will suggest you a configuration that you can put in `conf/parser.conf` and start to collect events.
 
+
+
+### Read from file
+secthemall.sh can read a file and collect events from it, using one of the secthemall parser (logtype). For make the client able to read a file, you need to configure it on `conf/parser.conf` using the following syntax:
+```sh
+<path to file> "<filter>" "<logtype>"
+```
+First of all, pay attention to the double quotes! The double quotes must be used for the filter and logtype but not for the file path.
+**&lt;filter&gt;** it should be a regular expression, or a text string, that will be used to filter the content of the file using the `egrep` command. 
+Somethink like: `cat <path to file> | egrep "<filter>"`.
 
 
 ## Requirements
