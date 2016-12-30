@@ -141,6 +141,13 @@ else
 	exit 1
 fi
 
+if [ ! -f ${CDIR}/conf/parser.conf ]; then
+	labeler; echo " Configuration file not found in ${CDIR}/conf/parser.conf"
+	labelin; echo " Trying to run autoconf..."
+	${CDIR}/inc/autoconf.sh > ${CDIR}/conf/parser.conf
+	labelin; echo " Autoconf completed. Please edit ${CDIR}/conf/parser.conf"
+fi
+
 ${CDIR}/inc/getblacklist.sh
 
 labelin; echo " checking for firewall rules updates..."

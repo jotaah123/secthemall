@@ -1,0 +1,60 @@
+# (::) SECTHEMALL
+# ----------------
+# Parser configuration file
+# more informations at https://github.com/theMiddleBlue/secthemall
+
+# Reading a log file
+# ------------------
+# secthemall.sh can collects events from log files.
+# all you need is a path, a regex filter and a logtype:
+#
+# </absolute/path/to/file> "<regex filter>" "<log type>"
+#
+# For example:
+# /var/log/auth.log ".*sshd.*(Accepted password for|Failed password for).*" "SSH"
+#
+# Or more simple:
+# /var/log/auth.log ".*sshd.*password.*" "SSH"
+#
+# Regex filter:
+# is just a regular expression that the client will use
+# while reading the log file, it's something like:
+# cat <yourfile> | egrep "<regex filter>"
+#
+# Log type:
+# you can choose one of the following log types:
+# SSH, iptables, nginx_access, netstat
+#
+# - SSH          = parse ssh authentication logs
+# - iptables     = parse iptables rule logs (or ufw logs) 
+# - nginx_access = parse logs in the nginx access.log
+# - netstat      = parse the output of the netstat command
+# - CEF          = parse a CEF syntax
+
+# Prse a command output:
+# ----------------------
+# You can use all log types to parse a system command output,
+# Using the following syntax:
+# 
+# cmd "<log type>" "<stat name>" "<cmd -args>"
+#
+# cmd            = say to the client to read a command stdout
+# <log type>     = can be: SSH, iptables, nginx_access, netstat, custom, etc...
+# <stat name>    = choose a name for the status file, for example: "myscript-output"
+# <cmd -args>    = the command with all its arguments
+#
+# For example:
+# cmd "netstat" "mynetstat" "/bin/netstat -ltunp"
+# cmd "nginx_access" "my-webserver" "docker exec -t mycontainer grep 404 /usr/local/nginx/logs/access.log"
+
+
+
+/var/log/auth.log ".*sshd.*password.*" "SSH"
+
+/var/log/messages "MAC.+SRC.+DST.+PROTO.+DPT" "iptables"
+
+/var/log/ufw.log "MAC.+SRC.+DST.+PROTO.+DPT" "iptables"
+
+cmd "netstat" "netstat_listen" "netstat -ltunp"
+
+cmd "nginx_access" "mycontainer-nginx-access" "docker exec -t mycontainer grep 404 /usr/local/nginx/logs/access.log"

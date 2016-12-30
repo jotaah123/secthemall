@@ -67,7 +67,6 @@ if [ $ARGREXHELP -ge 1 ]; then
 	exit 0
 fi
 
-
 AUTOCONF=$(echo "$@" | egrep -o "\-\-autoconf" | wc -l)
 if [ $AUTOCONF -ge 1 ]; then
 	labelin; echo " Trying to find intresting log files..."

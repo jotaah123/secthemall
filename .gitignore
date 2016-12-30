@@ -1,4 +1,5 @@
 conf/client.pid
+conf/parser.conf
 stat/*
 tmp/*
 inc/alias
