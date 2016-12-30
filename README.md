@@ -3,7 +3,7 @@ SECTHEMALL is a bash script that distributes and syncs a **blacklist on all your
 It can store your logs to the SECTHEMALL cloud and make you able to create **correlation rules** or **graphical reports**.
 With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerability Scan**, and more...
 
-## Index
+# Index
 - [How it works](#how-it-works)
   - [How the client works](#how-the-client-works)
   - [Authentication](#authentication)
@@ -21,7 +21,7 @@ With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerabilit
 - Requirements
 - Installation
 
-## How it works
+# How it works
 ![how it work](https://secthemall.com/img/secthemall-client-howitwork.001.jpeg)
 
 secthemall is a bash script that can read a log file, or the output of a command, and set an iptables rule.
@@ -39,7 +39,7 @@ You can also get graphical reports, create correlation rules, get notified by e-
 `secthemall.sh` needs OpenSSL to encrypt your events before send them to the secthemall cloud.
 It encrypts all collected events using a unique passphrase generated at the first authentication.
 
-### How the client works
+## How the client works
 ```sh
 # ./secthemall.sh -h
 +
@@ -74,7 +74,7 @@ It encrypts all collected events using a unique passphrase generated at the firs
 
 ```
 
-### Authentication
+## Authentication
 Once you have successfully completed the registration, the first time you run the client it will ask you to enter your username, password and the server alias.
 The server alias is a name (or a label) that you choose which the client will assign to all collected events.
 The alias can be, for example, something like "my-webserver" or "database1" or "my-application-node1".
@@ -98,11 +98,11 @@ Server alias, allowed chars [a-zA-Z0-9] and "-" (ex: web-server-1): mywebsite-no
 ```
 
 
-### Run the secthemall.sh client
+## Run the secthemall.sh client
 [![asciicast](https://asciinema.org/a/1rpn93kcmmixwsndaf9jlud6d.png)](https://asciinema.org/a/1rpn93kcmmixwsndaf9jlud6d)
 
 
-### Log type
+## Log type
 SECTHEMALL can collect events from different sources. For doing it, it uses different type of parsers that we call: "logtype".
 Following, a list of supported logtype:
 
@@ -112,7 +112,7 @@ Following, a list of supported logtype:
 </table>
 
 
-### Configuration
+## Configuration
 `secthemall.sh` needs to be configured to collect events from log files or commands output.
 Just edit the file `conf/parser.conf` and follow the instructions inside it. For example:
 
@@ -129,7 +129,7 @@ cmd "nginx_access" "my-webserver" "docker exec -t mycontainer grep 404 /usr/loca
 
 
 
-### Autoconfig
+## Autoconfig
 If you want a quick-and-dirty configuration, you could use the `--autoconf` parameter:
 ```sh
 # ./secthemall.sh --autoconf
@@ -149,7 +149,7 @@ It will suggest you a configuration that you can put in `conf/parser.conf` and s
 
 
 
-### Events from file
+## Events from file
 secthemall.sh can read a file and collect events from it, using one of the secthemall parser (logtype). For make the client able to read a file, you need to configure it on `conf/parser.conf` using the following syntax:
 ```sh
 <path to file> "<filter>" "<logtype>"
@@ -161,7 +161,7 @@ Somethink like: `cat <path to file> | egrep "<filter>"`.
 
 
 
-## Requirements
+# Requirements
 Keep in mind that SECTHEMALL is centrally orchestrated, so you need to create a **free** account on secthemall.com but don't worry... 
 it takes just few seconds! The registration need only your e-mail address, secthemall.com do the rest.
 
@@ -174,5 +174,5 @@ The secthemall client need:
 
 
 
-## Thanks to
+# Thanks to
 thanks to @maxtsepkov for [bash_colors](https://github.com/maxtsepkov/bash_colors)
