@@ -39,6 +39,9 @@ You can also get graphical reports, create correlation rules, get notified by e-
 `secthemall.sh` needs OpenSSL to encrypt your events before send them to the secthemall cloud.
 It encrypts all collected events using a unique passphrase generated at the first authentication.
 
+
+
+
 ## How the client works
 ```sh
 # ./secthemall.sh -h
@@ -74,6 +77,9 @@ It encrypts all collected events using a unique passphrase generated at the firs
 
 ```
 
+
+
+
 ## Authentication
 Once you have successfully completed the registration, the first time you run the client it will ask you to enter your username, password and the server alias.
 The server alias is a name (or a label) that you choose which the client will assign to all collected events.
@@ -98,8 +104,12 @@ Server alias, allowed chars [a-zA-Z0-9] and "-" (ex: web-server-1): mywebsite-no
 ```
 
 
+
+
 ## Run the secthemall.sh client
 [![asciicast](https://asciinema.org/a/1rpn93kcmmixwsndaf9jlud6d.png)](https://asciinema.org/a/1rpn93kcmmixwsndaf9jlud6d)
+
+
 
 
 ## Log type
@@ -110,6 +120,8 @@ Following, a list of supported logtype:
 	<tr><td><b>SSH</b></td> <td>collects all authentication events from sshd</td></tr>
 	<tr><td><b>nginx_access</b></td> <td>collects events from Nginx access.log (only 40x and 50x HTTP response status)</td></tr>
 </table>
+
+
 
 
 ## Configuration
@@ -126,6 +138,7 @@ cmd "netstat" "mynetstat" "/bin/netstat -ltunp"
 # this will read the access.log inside a docker container
 cmd "nginx_access" "my-webserver" "docker exec -t mycontainer grep 404 /usr/local/nginx/logs/access.log"
 ```
+
 
 
 
@@ -149,6 +162,7 @@ It will suggest you a configuration that you can put in `conf/parser.conf` and s
 
 
 
+
 ## Events from file
 secthemall.sh can read a file and collect events from it, using one of the secthemall parser (logtype). For make the client able to read a file, you need to configure it on `conf/parser.conf` using the following syntax:
 ```sh
@@ -158,6 +172,7 @@ First of all, pay attention to the double quotes! The double quotes must be used
 
 **&lt;filter&gt;** it should be a regular expression, or a text string, that will be used to filter the content of the file using the `egrep` command. 
 Somethink like: `cat <path to file> | egrep "<filter>"`.
+
 
 
 
@@ -171,6 +186,7 @@ The secthemall client need:
 - iptables
 - curl
 - base64
+
 
 
 
