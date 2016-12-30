@@ -81,9 +81,9 @@ It encrypts all collected events using a unique passphrase generated at the firs
 
 
 ## Authentication
-Once you have successfully completed the registration, the first time you run the client it will ask you to enter your username, password and the server alias.
-The server alias is a name (or a label) that you choose which the client will assign to all collected events.
-The alias can be, for example, something like "my-webserver" or "database1" or "my-application-node1".
+Once you have successfully completed the registration, the first time you run the client it will ask you to enter your username, password and a server alias.
+Server alias is a name (or a label) that you choose which the client will assign to all collected events.
+An alias can be, for example, something like "my-webserver" or "database1" or "my-application-node1".
 
 ```sh
 # ./secthemall.sh --auth
