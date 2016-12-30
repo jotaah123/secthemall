@@ -108,7 +108,8 @@ Following, a list of supported logtype:
 
 <table>
 <tr>
-	<td>**SSH**</td> <td>collect all authentication events from sshd</td>
+	<td><b>SSH</b></td> <td>collects all authentication events from sshd</td>
+	<td><b>nginx_access</b></td> <td>collects events from Nginx access.log (only 40x and 50x HTTP response status)</td>
 </tr>
 </table>
 
