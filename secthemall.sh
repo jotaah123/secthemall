@@ -43,6 +43,7 @@ if [ $ARGREXHELP -ge 1 ]; then
 	labelcmd "--background or -b"; echo " Run client in background"
 	labelcmd "--stop"; echo "             Stop client"
 	labelcmd "--restart"; echo "          Restart client in background"
+	labelcmd "--autoconf"; echo "         Try to suggest a conf/paeser.conf"
 	echo "+"
 	labelcmd "--gbladd <ip>"; echo "      Add <ip> to your Global Blacklist"
 	labelcmd "--gbldel <ip>"; echo "      Delete <ip> to your Global Blacklist"
@@ -66,6 +67,18 @@ if [ $ARGREXHELP -ge 1 ]; then
 	exit 0
 fi
 
+
+AUTOCONF=$(echo "$@" | egrep -o "\-\-autoconf" | wc -l)
+if [ $AUTOCONF -ge 1 ]; then
+	labelin; echo " Trying to find intresting log files..."
+	echo ""
+	echo "# copy under this line and paste in conf/parser.conf"
+	echo "# --------------------------------------------------"
+	${CDIR}/inc/autoconf.sh
+	echo "# --------------------------------------------------"
+	echo ""
+	exit 0
+fi
 
 GETLOG=$(echo "$@" | egrep -o "\-\-getlogs \-q (.+)" | wc -l)
 if [ $GETLOG -ge 1 ]; then

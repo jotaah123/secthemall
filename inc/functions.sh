@@ -70,7 +70,7 @@ function parselog {
 		exit 0
 	fi
 
-	curl -s -d "a=writelogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&type=${3}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" -d @${CDIR}/../tmp/e${logfile//\//_} "https://secthemall.com/api/v1/"
+	curl -s -d "a=writelogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&type=${3}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" -d @${CDIR}/../tmp/e${logfile//\//_} "https://wl.secthemall.com/api/v1/"
 	labelok; echo -n " Logs sent for file "; clr_blue "${logfile}"
 	rm -rf ${CDIR}/../tmp/t${logfile//\//_}
 	rm -rf ${CDIR}/../tmp/e${logfile//\//_}
@@ -104,7 +104,7 @@ function parsecmd {
 		exit 0
 	fi
 
-	curl -d "a=writelogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&type=${logptye}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" -d @${CDIR}/../tmp/e${logfile//\//_} "https://secthemall.com/api/v1/"
+	curl -d "a=writelogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&type=${logptye}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" -d @${CDIR}/../tmp/e${logfile//\//_} "https://wl.secthemall.com/api/v1/"
 	labelok; echo -n " Logs sent for file "; clr_blue "${logfile}"
 	rm -rf ${CDIR}/../tmp/t${logfile//\//_}
 	rm -rf ${CDIR}/../tmp/e${logfile//\//_}
