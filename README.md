@@ -118,7 +118,10 @@ Following, a list of supported logtype:
 
 <table>
 	<tr><td><b>SSH</b></td> <td>collects all authentication events from sshd</td></tr>
+	<tr><td><b>iptables</b></td> <td>collects events from iptables rule logs (or from UFW)</td></tr>
 	<tr><td><b>nginx_access</b></td> <td>collects events from Nginx access.log (only 40x and 50x HTTP response status)</td></tr>
+	<tr><td><b>netstat</b></td> <td>collects events from the netstat system command</td></tr>
+	<tr><td><b>CEF</b></td> <td>collects events using <b>C</b>ommon <b>E</b>vent <b>F</b>ormat syntax</td></tr>
 </table>
 
 
@@ -171,7 +174,9 @@ secthemall.sh can read a file and collect events from it, using one of the secth
 First of all, pay attention to the double quotes! The double quotes must be used for the filter and logtype but not for the file path.
 
 **&lt;filter&gt;** it should be a regular expression, or a text string, that will be used to filter the content of the file using the `egrep` command. 
-Somethink like: `cat <path to file> | egrep "<filter>"`.
+Something like: `cat <path to file> | egrep "<filter>"`.
+
+**&lt;logtype&gt;** is one of the [secthemall logtype parser](#log-type)
 
 
 
