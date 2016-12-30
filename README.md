@@ -8,9 +8,10 @@ With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerabilit
   - [How the client works](#how-the-client-works)
   - [Authentication](#authentication)
   - [Run the secthemall.sh client](#run-the-secthemallsh-client)
+  - Log type
   - [Configuration](#configuration)
   - [Autoconfig](#autoconfig)
-  - Read from file
+  - Events from file
   - Read command output
 - Blacklist
   - Block an IP to all your servers
@@ -101,6 +102,17 @@ Server alias, allowed chars [a-zA-Z0-9] and "-" (ex: web-server-1): mywebsite-no
 [![asciicast](https://asciinema.org/a/1rpn93kcmmixwsndaf9jlud6d.png)](https://asciinema.org/a/1rpn93kcmmixwsndaf9jlud6d)
 
 
+### Log type
+SECTHEMALL can collect events from different sources. For doing it, it uses different type of parsers that we call: "logtype".
+Following, a list of supported logtype:
+
+<table>
+<tr>
+	<td>**SSH**</td> <td>collect all authentication events from sshd</td>
+</tr>
+</table>
+
+
 ### Configuration
 `secthemall.sh` needs to be configured to collect events from log files or commands output.
 Just edit the file `conf/parser.conf` and follow the instructions inside it. For example:
@@ -138,14 +150,16 @@ It will suggest you a configuration that you can put in `conf/parser.conf` and s
 
 
 
-### Read from file
+### Events from file
 secthemall.sh can read a file and collect events from it, using one of the secthemall parser (logtype). For make the client able to read a file, you need to configure it on `conf/parser.conf` using the following syntax:
 ```sh
 <path to file> "<filter>" "<logtype>"
 ```
 First of all, pay attention to the double quotes! The double quotes must be used for the filter and logtype but not for the file path.
+
 **&lt;filter&gt;** it should be a regular expression, or a text string, that will be used to filter the content of the file using the `egrep` command. 
 Somethink like: `cat <path to file> | egrep "<filter>"`.
+
 
 
 ## Requirements
