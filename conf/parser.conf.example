@@ -1,6 +1,7 @@
 # (::) SECTHEMALL
 # ----------------
 # Parser configuration file
+# this file must be renamed to: parser.conf
 # more informations at https://github.com/theMiddleBlue/secthemall
 
 # Reading a log file
@@ -50,8 +51,6 @@
 
 
 /var/log/auth.log ".*sshd.*password.*" "SSH"
-
-/var/log/messages "MAC.+SRC.+DST.+PROTO.+DPT" "iptables"
 
 /var/log/ufw.log "MAC.+SRC.+DST.+PROTO.+DPT" "iptables"
 

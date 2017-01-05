@@ -86,6 +86,14 @@ if [[ "${1}" == "auth" ]]; then
 		echo -n ${USERNAME} > ${CDIR}/inc/username
 		echo -n ${SERVERALIAS} > ${CDIR}/inc/alias
 		echo -e "\n\n"
+
+		if [ ! -f ${CDIR}/conf/parser.conf ]; then
+			labeler; echo " Configuration file not found in ${CDIR}/conf/parser.conf"
+			labelin; echo " Trying to run autoconf..."
+			${CDIR}/inc/autoconf.sh > ${CDIR}/conf/parser.conf
+			labelin; echo " Autoconf completed. Please edit ${CDIR}/conf/parser.conf"
+		fi
+
 		labelok; echo " passphrase saved in ${CDIR}/inc/passphrase"
 		labelok; echo " Now you can run ./secthemall.sh"
 		exit 0;
@@ -141,12 +149,40 @@ else
 	exit 1
 fi
 
-if [ ! -f ${CDIR}/conf/parser.conf ]; then
-	labeler; echo " Configuration file not found in ${CDIR}/conf/parser.conf"
-	labelin; echo " Trying to run autoconf..."
-	${CDIR}/inc/autoconf.sh > ${CDIR}/conf/parser.conf
-	labelin; echo " Autoconf completed. Please edit ${CDIR}/conf/parser.conf"
+if type "ip6tables" > /dev/null; then
+	CHECKSECTHEMALLCHAINBL6=$(ip6tables -L -n | grep -i 'Chain' | grep 'secthemall-blacklist' | wc -l)
+	if [[ "${CHECKSECTHEMALLCHAINBL6}" == "0" ]]; then
+		labelwa; echo " secthemall ip6tables blacklist does not exists, creating it..."
+		ip6tables -N secthemall-blacklist
+		ip6tables -I INPUT -j secthemall-blacklist
+		ip6tables -I FORWARD -j secthemall-blacklist
+	fi
+
+	CHECKSECTHEMALLCHAINBL6=$(ip6tables -L -n | grep -i 'Chain' | grep 'secthemall-blacklist' | wc -l)
+	if [[ "${CHECKSECTHEMALLCHAINBL6}" == "1" ]]; then
+		labelok; echo " ip6tables chain secthemall-blacklist exists."
+	else
+		labeler; echo " unable to create secthemall-blacklist chain v6."
+		exit 1
+	fi
+
+	CHECKSECTHEMALLCHAINWL6=$(ip6tables -L -n | grep -i 'Chain' | grep 'secthemall-whitelist' | wc -l)
+	if [[ "${CHECKSECTHEMALLCHAINWL6}" == "0" ]]; then
+		labelwa; echo " secthemall ip6tables whitelist does not exists, creating it..."
+		ip6tables -N secthemall-whitelist
+		ip6tables -I INPUT -j secthemall-whitelist
+		ip6tables -I FORWARD -j secthemall-whitelist
+	fi
+
+	CHECKSECTHEMALLCHAINWL6=$(ip6tables -L -n | grep -i 'Chain' | grep 'secthemall-whitelist' | wc -l)
+	if [[ "${CHECKSECTHEMALLCHAINWL6}" == "1" ]]; then
+		labelok; echo " ip6tables chain secthemall-whitelist exists."
+	else
+		labeler; echo " unable to create secthemall-whitelist chain. v6"
+		exit 1
+	fi
 fi
+
 
 ${CDIR}/inc/getblacklist.sh
 

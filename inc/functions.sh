@@ -116,12 +116,18 @@ function getblacklist {
 	SALIAS=$(cat ${CDIR}/alias)
 
 	iptables -F secthemall-blacklist
-
-	GETBLACKLIST=$(curl -s -d "a=getmyblacklist&ipversion=ipv4&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" "https://secthemall.com/api/v1/")
-
-	for ip in $GETBLACKLIST; do
+	GETBLACKLIST4=$(curl -s -d "a=getmyblacklist&ipversion=ipv4&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" "https://secthemall.com/api/v1/")
+	for ip in $GETBLACKLIST4; do
 		iptables -I secthemall-blacklist -s ${ip} -j DROP
 	done;
+	labelok; echo " Blacklist v4 synced."
 
-	labelok; echo " Blacklist synced."
+	if type "ip6tables" > /dev/null; then
+		ip6tables -F secthemall-blacklist
+		GETBLACKLIST6=$(curl -s -d "a=getmyblacklist&ipversion=ipv6&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" "https://secthemall.com/api/v1/")
+		for ip in $GETBLACKLIST6; do
+			ip6tables -I secthemall-blacklist -s ${ip} -j DROP
+		done;
+		labelok; echo " Blacklist v6 synced."
+	fi
 }

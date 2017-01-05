@@ -4,6 +4,8 @@ It can store your logs to the SECTHEMALL cloud and make you able to create **cor
 With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerability Scan**, and more...
 
 # Index
+- Requirements
+- Installation
 - [How it works](#how-it-works)
   - [How the client works](#how-the-client-works)
   - [Authentication](#authentication)
@@ -18,8 +20,35 @@ With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerabilit
   - Sync a server blacklist
 - Cloud
   - Correlation Rules
-- Requirements
-- Installation
+- API
+
+
+
+
+# Requirements
+Keep in mind that SECTHEMALL is centrally orchestrated, so you need to create a **free** account on secthemall.com but don't worry... 
+it takes just few seconds! The registration need only your e-mail address, secthemall.com do the rest.
+
+The first time you run the `secthemall.sh` script, it check if all required components are present.
+The secthemall client need:
+- openssl
+- iptables
+- curl
+- base64
+
+
+
+# Installation
+You just need to clone the git project and execute the `secthemall.sh` script (the client needs root privileges and probably, in some distributions, you should run it using sudo).
+```bash
+$ cd /opt/
+$ clone https://github.com/theMiddleBlue/secthemall.git
+$ cd secthemall/
+$ ./secthemall.sh -h
+```
+
+
+
 
 # How it works
 ![how it work](https://secthemall.com/img/secthemall-client-howitwork.001.jpeg)
@@ -177,20 +206,6 @@ First of all, pay attention to the double quotes! The double quotes must be used
 Something like: `cat <path to file> | egrep "<filter>"`.
 
 **&lt;logtype&gt;** is one of the [secthemall logtype parser](#log-type)
-
-
-
-
-# Requirements
-Keep in mind that SECTHEMALL is centrally orchestrated, so you need to create a **free** account on secthemall.com but don't worry... 
-it takes just few seconds! The registration need only your e-mail address, secthemall.com do the rest.
-
-The first time you run the `secthemall.sh` script, it check if all required components are present.
-The secthemall client need:
-- openssl
-- iptables
-- curl
-- base64
 
 
 
