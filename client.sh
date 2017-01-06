@@ -88,14 +88,14 @@ if [[ "${1}" == "auth" ]]; then
 		echo -e "\n\n"
 
 		if [ ! -f ${CDIR}/conf/parser.conf ]; then
-			labeler; echo " Configuration file not found in ${CDIR}/conf/parser.conf"
+			labelin; echo " Configuration file not found in ${CDIR}/conf/parser.conf"
 			labelin; echo " Trying to run autoconf..."
 			${CDIR}/inc/autoconf.sh > ${CDIR}/conf/parser.conf
 			labelin; echo " Autoconf completed. Please edit ${CDIR}/conf/parser.conf"
 		fi
 
 		labelok; echo " passphrase saved in ${CDIR}/inc/passphrase"
-		labelok; echo " Now you can run ./secthemall.sh"
+		labelok; echo " Now you can run ./secthemall.sh --start"
 		exit 0;
 	else
 		echo -e "\n"
@@ -163,7 +163,8 @@ if type "ip6tables" > /dev/null; then
 		labelok; echo " ip6tables chain secthemall-blacklist exists."
 	else
 		labeler; echo " unable to create secthemall-blacklist chain v6."
-		exit 1
+		labelwa; echo " secthemall will continue without ip6tables..."
+		# exit 1
 	fi
 
 	CHECKSECTHEMALLCHAINWL6=$(ip6tables -L -n | grep -i 'Chain' | grep 'secthemall-whitelist' | wc -l)
@@ -179,7 +180,8 @@ if type "ip6tables" > /dev/null; then
 		labelok; echo " ip6tables chain secthemall-whitelist exists."
 	else
 		labeler; echo " unable to create secthemall-whitelist chain. v6"
-		exit 1
+		labelwa; echo " secthemall will continue without ip6tables..."
+		#exit 1
 	fi
 fi
 
