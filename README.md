@@ -51,7 +51,6 @@ $ ./secthemall.sh -h
 
 
 # How it works
-![how it work](https://secthemall.com/img/secthemall-client-howitwork.001.jpeg)
 ![how it work](https://secthemall.com/img/shared-blacklist.png)
 
 secthemall is a bash script that can read a log file, or the output of a command, and set an iptables rule.
@@ -73,6 +72,8 @@ It encrypts all collected events using a unique passphrase generated at the firs
 
 
 ## How the client works
+![how it work](https://secthemall.com/img/secthemall-client-howitwork.001.jpeg)
+
 ```sh
 # ./secthemall.sh -h
 +
