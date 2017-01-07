@@ -153,9 +153,9 @@ if type "ip6tables" > /dev/null; then
 	CHECKSECTHEMALLCHAINBL6=$(ip6tables -L -n | grep -i 'Chain' | grep 'secthemall-blacklist' | wc -l)
 	if [[ "${CHECKSECTHEMALLCHAINBL6}" == "0" ]]; then
 		labelwa; echo " secthemall ip6tables blacklist does not exists, creating it..."
-		ip6tables -N secthemall-blacklist
-		ip6tables -I INPUT -j secthemall-blacklist
-		ip6tables -I FORWARD -j secthemall-blacklist
+		ip6tables -N secthemall-blacklist > /dev/null 2>&1
+		ip6tables -I INPUT -j secthemall-blacklist > /dev/null 2>&1
+		ip6tables -I FORWARD -j secthemall-blacklist > /dev/null 2>&1
 	fi
 
 	CHECKSECTHEMALLCHAINBL6=$(ip6tables -L -n | grep -i 'Chain' | grep 'secthemall-blacklist' | wc -l)
@@ -170,9 +170,9 @@ if type "ip6tables" > /dev/null; then
 	CHECKSECTHEMALLCHAINWL6=$(ip6tables -L -n | grep -i 'Chain' | grep 'secthemall-whitelist' | wc -l)
 	if [[ "${CHECKSECTHEMALLCHAINWL6}" == "0" ]]; then
 		labelwa; echo " secthemall ip6tables whitelist does not exists, creating it..."
-		ip6tables -N secthemall-whitelist
-		ip6tables -I INPUT -j secthemall-whitelist
-		ip6tables -I FORWARD -j secthemall-whitelist
+		ip6tables -N secthemall-whitelist > /dev/null 2>&1
+		ip6tables -I INPUT -j secthemall-whitelist > /dev/null 2>&1
+		ip6tables -I FORWARD -j secthemall-whitelist > /dev/null 2>&1
 	fi
 
 	CHECKSECTHEMALLCHAINWL6=$(ip6tables -L -n | grep -i 'Chain' | grep 'secthemall-whitelist' | wc -l)

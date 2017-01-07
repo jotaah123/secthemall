@@ -47,7 +47,11 @@
 # For example:
 # cmd "netstat" "mynetstat" "/bin/netstat -ltunp"
 # cmd "nginx_access" "my-webserver" "docker exec -t mycontainer grep 404 /usr/local/nginx/logs/access.log"
-
+#
+# Docker exec:
+# you can get output from a command in any of your docker containers.
+# remember to use the syntax: docker exec -t <mycontainer> <command>
+# don't use the -i parameter, it may generate unexpected errors
 
 
 /var/log/auth.log ".*sshd.*password.*" "SSH"
