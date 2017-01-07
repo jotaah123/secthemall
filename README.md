@@ -51,7 +51,7 @@ $ ./secthemall.sh -h
 
 
 # How it works
-![how it work](https://secthemall.com/img/shared-blacklist.png)
+![how it work](https://secthemall.com/img/staentral.001.jpeg)
 
 secthemall is a bash script that can read a log file, or the output of a command, and set an iptables rule.
 For example, it could reads your `/var/log/auth.log` and block an IP address that fails the ssh authentication for more then 6 times,
