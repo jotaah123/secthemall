@@ -5,3 +5,4 @@ source $CDIR/functions.sh
 source $CDIR/bash_colors.sh
 
 getblacklist
+getwhitelist

@@ -62,7 +62,7 @@ All blocked IPs will be sent to your global blacklist on secthemall.com and dist
 Imagine that you have 3 linux server: a brute force attack blocked on the server A will be automatically blocked on servers B and C.
 
 Get a free account on secthemall.com and start to use the secthemall.sh client.
-You will see all your servers events on the secthemall online dashboard, where you can add or remove IP from your global black or white list.
+You'll see all your servers events on the secthemall online dashboard, where you can add or remove IP from your global black or white list.
 You can also get graphical reports, create correlation rules, get notified by e-mail or telegram when an IP went in blackist, etc...
 
 `secthemall.sh` needs OpenSSL to encrypt your events before send them to the secthemall cloud.
@@ -108,6 +108,7 @@ It encrypts all collected events using a unique passphrase generated at the firs
 
 ```
 
+### secthemall.sh is not a Remote Control!
 
 
 

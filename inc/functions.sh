@@ -123,11 +123,33 @@ function getblacklist {
 	labelok; echo " Blacklist v4 synced."
 
 	if type "ip6tables" > /dev/null; then
-		ip6tables -F secthemall-blacklist
+		ip6tables -F secthemall-blacklist > /dev/null 2>&1
 		GETBLACKLIST6=$(curl -s -d "a=getmyblacklist&ipversion=ipv6&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" "https://secthemall.com/api/v1/")
 		for ip in $GETBLACKLIST6; do
-			ip6tables -I secthemall-blacklist -s ${ip} -j DROP
+			ip6tables -I secthemall-blacklist -s ${ip} -j DROP > /dev/null 2>&1
 		done;
 		labelok; echo " Blacklist v6 synced."
+	fi
+}
+
+function getwhitelist {
+	USERNAME=$(cat ${CDIR}/username)
+	APIKEY=$(cat ${CDIR}/apikey)
+	SALIAS=$(cat ${CDIR}/alias)
+
+	iptables -F secthemall-whitelist
+	GETBLACKLIST4=$(curl -s -d "a=getmywhitelist&ipversion=ipv4&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" "https://secthemall.com/api/v1/")
+	for ip in $GETBLACKLIST4; do
+		iptables -I secthemall-whitelist -s ${ip} -j ACCEPT
+	done;
+	labelok; echo " Whitelist v4 synced."
+
+	if type "ip6tables" > /dev/null; then
+		ip6tables -F secthemall-whitelist > /dev/null 2>&1
+		GETBLACKLIST6=$(curl -s -d "a=getmywhitelist&ipversion=ipv6&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" "https://secthemall.com/api/v1/")
+		for ip in $GETBLACKLIST6; do
+			ip6tables -I secthemall-whitelist -s ${ip} -j ACCEPT > /dev/null 2>&1
+		done;
+		labelok; echo " Whitelist v6 synced."
 	fi
 }
