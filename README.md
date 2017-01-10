@@ -20,6 +20,7 @@ With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerabilit
   - Sync a server blacklist
 - Cloud
   - Correlation Rules
+  - Public Blacklist
 - API
 
 
@@ -211,6 +212,26 @@ Something like: `cat <path to file> | egrep "<filter>"`.
 **&lt;logtype&gt;** is one of the [secthemall logtype parser](#log-type)
 
 
+## Read command output
+
+
+# Blacklist
+## Block an IP to all your servers
+## Sync a server blacklist
+
+
+# Cloud
+## Correlation Rules
+## Public Blacklist
+A public blacklist collects all security events, of all SECTHEMALL users, and makes a "bad reputation" database that you could use to block attackers on your servers.
+The purpose of these lists is to prevent attacks before they occur on your servers. For example: if an IP address has already attacked 10 SECTHEMALL users,
+you could take advantage of this information and block the threat before it comes true.
+
+All IP addresses in these lists will expire after 7 days from the date of inclusion.
+You just need to click on the "subscribe" button to add this blacklist to one (or all) of your nodes.
+Remember that you'll not receive a notification when an IP goes in any of the following lists.
+
+# API
 
 
 # Thanks to
