@@ -1,7 +1,7 @@
 # (::) SECTHEMALL
 SECTHEMALL is a bash script that distributes and syncs a **blacklist on all your linux server** using iptables.
-It can store your logs to the SECTHEMALL cloud and make you able to create **correlation rules** or **graphical reports**.
-With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerability Scan**, and more...
+It can store your security logs to the SECTHEMALL Cloud, and make you able to create **Custom Rules** or **Graphical Reports**.
+With SECTHEMALL you'll block **Brute Force Attacks, Port Scan, Web Vulnerability Scan**, and more...
 
 # Index
 - Requirements
