@@ -28,15 +28,16 @@ With SECTHEMALL you'll block **Brute Force Attacks, Port Scan, Web Vulnerability
 
 
 # Requirements
-Keep in mind that SECTHEMALL is centrally orchestrated, so you need to create a **free** account on secthemall.com but don't worry... 
-it takes just few seconds! The registration process just needs your e-mail address, and secthemall.com will do the dirty job for you.
+SECTHEMALL is centrally orchestrated, so you need a **free** account on secthemall.com but don't worry... 
+it takes just few seconds! Just enter your e-mail address, and secthemall.com will do the dirty job for you.
 
-The first time you run the `secthemall.sh` script, it check if all required components are present.
-The secthemall client need:
-- openssl
-- iptables
-- curl
-- base64
+The first time you run the `secthemall.sh` script, it'll check if all required components are present.
+The following executables must be present:
+
+- iptables (yes... Would you believe it?)
+- openssl (for encrypt logs before send it)
+- curl (for the SECTHEMALL API)
+- base64 (for text string encode)
 
 
 
