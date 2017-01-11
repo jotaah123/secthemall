@@ -1,5 +1,6 @@
 # (::) SECTHEMALL
-SECTHEMALL is a bash script that distributes and syncs a **blacklist on all your linux server** using iptables.
+SECTHEMALL is a bash script that automatically blocks IP using iptables.
+It distributes and syncs a **blacklist and whitelist on all your linux server**.
 It can store your security logs to the SECTHEMALL Cloud, and make you able to create **Custom Rules** or **Graphical Reports**.
 With SECTHEMALL you'll block **Brute Force Attacks, Port Scan, Web Vulnerability Scan**, and more...
 
