@@ -32,7 +32,7 @@ SECTHEMALL is centrally orchestrated, so you need a **free** account on secthema
 it takes just few seconds! Just enter your e-mail address, and secthemall.com will do the dirty job for you.
 
 The first time you run the `secthemall.sh` script, it'll check if all required components are present.
-The following executables must be present:
+The following software must be installed:
 
 - **iptables** (yes... Would you believe it?)
 - **openssl** (for encrypt logs before send it)
