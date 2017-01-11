@@ -28,7 +28,7 @@ With SECTHEMALL you can block **Brute Force Attacks, Port Scan, Web Vulnerabilit
 
 # Requirements
 Keep in mind that SECTHEMALL is centrally orchestrated, so you need to create a **free** account on secthemall.com but don't worry... 
-it takes just few seconds! The registration need only your e-mail address, and secthemall.com will do the dirty job for you.
+it takes just few seconds! The registration process just need only your e-mail address, and secthemall.com will do the dirty job for you.
 
 The first time you run the `secthemall.sh` script, it check if all required components are present.
 The secthemall client need:
@@ -227,7 +227,7 @@ A public blacklist collects all security events, of all SECTHEMALL users, and ma
 The purpose of these lists is to prevent attacks before they occur on your servers. For example: if an IP address has already attacked 10 SECTHEMALL users,
 you could take advantage of this information and block the threat before it comes true.
 
-All IP addresses in these lists will expire after 7 days from the date of inclusion.
+**All IP addresses in these lists will expire after 7 days** from the date of inclusion.
 You just need to click on the "subscribe" button to add this blacklist to one (or all) of your nodes.
 Remember that you'll not receive a notification when an IP goes in any of the following lists.
 
