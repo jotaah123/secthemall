@@ -42,7 +42,7 @@ The following software must be installed:
 
 
 # Installation
-You just need to clone the git project and execute the `secthemall.sh` script (the client needs root privileges and probably, in some distributions, you should run it using sudo).
+You just need to clone the git project and execute the `secthemall.sh` script (it needs root privileges and probably, in some distributions, you should run it using sudo).
 ```bash
 $ cd /opt/
 $ clone https://github.com/theMiddleBlue/secthemall.git
