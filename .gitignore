@@ -6,3 +6,4 @@ inc/alias
 inc/apikey
 inc/passphrase
 inc/username
+build.sh
