@@ -54,12 +54,12 @@ $ ./secthemall.sh -h
 # How it works
 ![how it work](https://secthemall.com/img/staentral.001.jpeg)
 
-secthemall is a bash script that can read a log file, or the output of a command, and set an iptables rule.
+`secthemall.sh` is a bash script that can read a log file, or the output of a command, and set an iptables rule.
 For example, it could reads your `/var/log/auth.log` and block an IP address that fails the ssh authentication for more then 6 times,
 or it could read the `access.log` of your nginx server and block an IP address that get more then 20 "page not found" errors.
 
 Each blocked IP address (both IPv4 or IPv6) is added to an iptables rules chain and blocked (with something like `iptables -s <ipv4> -j DROP`).
-All blocked IPs will be sent to your global blacklist on secthemall.com and distributed on all your servers that run the secthemall.sh script.
+**All blocked IPs will be sent to your global blacklist on secthemall.com and distributed on all your servers that run the secthemall.sh script.**
 Imagine that you have 3 linux server: a brute force attack blocked on the server A will be automatically blocked on servers B and C.
 
 Get a free account on secthemall.com and start to use the secthemall.sh client.
