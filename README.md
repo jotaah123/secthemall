@@ -34,10 +34,10 @@ it takes just few seconds! Just enter your e-mail address, and secthemall.com wi
 The first time you run the `secthemall.sh` script, it'll check if all required components are present.
 The following executables must be present:
 
-- iptables (yes... Would you believe it?)
-- openssl (for encrypt logs before send it)
-- curl (for the SECTHEMALL API)
-- base64 (for text string encode)
+- **iptables** (yes... Would you believe it?)
+- **openssl** (for encrypt logs before send it)
+- **curl** (for the SECTHEMALL API)
+- **base64** (for text string encode)
 
 
 
