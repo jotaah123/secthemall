@@ -1,7 +1,7 @@
 # (::) SECTHEMALL
-SECTHEMALL is a bash script that automatically blocks IP using iptables.
+SECTHEMALL is a bash script that automatically blocks IPs using iptables.
 It distributes and syncs a **blacklist and whitelist on all your linux server**.
-It can store your security logs to the SECTHEMALL Cloud, and make you able to create **Custom Rules** or **Graphical Reports**.
+It can store your security logs to the SECTHEMALL Cloud, and makes you able to create **Custom Rules** or **Graphical Reports**.
 With SECTHEMALL you'll block **Brute Force Attacks, Port Scan, Web Vulnerability Scan**, and more...
 
 # Index
@@ -11,17 +11,17 @@ With SECTHEMALL you'll block **Brute Force Attacks, Port Scan, Web Vulnerability
   - [How the client works](#how-the-client-works)
   - [Authentication](#authentication)
   - [Run the secthemall.sh client](#run-the-secthemallsh-client)
-  - Log type
+  - Log types
   - [Configuration](#configuration)
   - [Autoconfig](#autoconfig)
   - Events from file
-  - Read command output
+  - Read command outputs
 - Blacklist
-  - Block an IP to all your servers
+  - Block an IP on all your servers
   - Sync a server blacklist
 - Cloud
-  - Correlation Rules
-  - Public Blacklist
+  - Custom Rules
+  - SECTHEMALL Blacklists
 - API
 
 
@@ -29,15 +29,15 @@ With SECTHEMALL you'll block **Brute Force Attacks, Port Scan, Web Vulnerability
 
 # Requirements
 SECTHEMALL is centrally orchestrated, so you need a **free** account on secthemall.com but don't worry... 
-it takes just few seconds! Just enter your e-mail address, and secthemall.com will do the dirty job for you.
+it takes just few seconds! Enter your e-mail address and secthemall.com will do the dirty job for you.
 
 The first time you run the `secthemall.sh` script, it'll check if all required components are present.
 The following software must be installed:
 
 - **iptables** (yes... Would you believe it?)
-- **openssl** (for encrypt logs before send it)
+- **openssl** (for encrypting logs before sending them)
 - **curl** (for the SECTHEMALL API)
-- **base64** (for text string encode)
+- **base64** (for text string encoding)
 
 
 
@@ -62,11 +62,11 @@ or it could read the `access.log` of your nginx server and block an IP address t
 
 Each blocked IP address (both IPv4 or IPv6) is added to an iptables rules chain and blocked (with something like `iptables -s <ipv4> -j DROP`).
 **All blocked IPs will be sent to your global blacklist on secthemall.com and distributed on all your servers that run the secthemall.sh script.**
-Imagine that you have 3 linux server: a brute force attack blocked on the server A will be automatically blocked on servers B and C.
+Imagine that you have 3 Linux servers: an IP blocked for a brute force attack on the server A will be automatically blocked on servers B and C.
 
-Get a free account on secthemall.com and start to use the secthemall.sh client.
-You'll see all your servers events on the secthemall online dashboard, where you can add or remove IP from your global black or white list.
-You can also get graphical reports, create correlation rules, get notified by e-mail or telegram when an IP went in blackist, etc...
+Get a free account on secthemall.com and start using `secthemall.sh` client.
+You'll see all your servers events on the **secthemall online dashboard**, where you can add or remove IPs from your global black or white list.
+You can also get graphical reports, create custom rules, get notified by e-mail or telegram when an IP went in blackist, etc...
 
 `secthemall.sh` needs OpenSSL to encrypt your events before send them to the secthemall cloud.
 It encrypts all collected events using a unique passphrase generated at the first authentication.
@@ -75,7 +75,7 @@ It encrypts all collected events using a unique passphrase generated at the firs
 
 
 ## How the client works
-![how it work](https://secthemall.com/img/secthemall-client-howitwork.001.jpeg)
+![how it works](https://secthemall.com/img/secthemall-client-howitwork.001.jpeg)
 
 ```sh
 # ./secthemall.sh -h
@@ -83,31 +83,31 @@ It encrypts all collected events using a unique passphrase generated at the firs
 + (::) SECTHEMALL
 +
 +  --help or -h        Show this help
-+  --auth              Authenticate with your username and pasword
++  --auth              Authenticate with your username and password
 +  --start             Run client in foreground
 +  --background or -b  Run client in background
 +  --stop              Stop client
 +  --restart           Restart client in background
 +
-+  --gbladd <ip>       Add <ip> to your Global Blacklist
-+  --gbldel <ip>       Delete <ip> to your Global Blacklist
-+  --gblshow           Show your Global Blacklist (json)
-+  --gwladd <ip>       Add <ip> to your Global Whitelist
-+  --gwldel <ip>       Delete <ip> to your Global Whitelist
-+  --gwlshow           Show your Global Whitelist (json)
++  --gbladd <ip>       Add <ip> to Global Blacklist
++  --gbldel <ip>       Delete <ip> to Global Blacklist
++  --gblshow           Show Global Blacklist (json)
++  --gwladd <ip>       Add <ip> to Global Whitelist
++  --gwldel <ip>       Delete <ip> to Global Whitelist
++  --gwlshow           Show Global Whitelist (json)
 +
-+  --lblshow           Show your Local Blacklist (iptables)
-+  --lwlshow           Show your Local Whitelist (iptables)
++  --lblshow           Show Local Blacklist (iptables)
++  --lwlshow           Show Local Whitelist (iptables)
 +
-+  --getlogs [-q ...]  Get collected logs from your nodes (json)
++  --getlogs [-q ...]  Get collected logs from all nodes (json)
 +
 
 
- Example usage:
- ./secthemall.sh --start -b         # this will start the client in background
- ./secthemall.sh --restart          # this will restart the client in background
- ./secthemall.sh --stop             # this will stop the client
- ./secthemall.sh --gbladd 1.2.3.4   # this will add 1.2.3.4 to all your nodes blacklist
+ Examples usage:
+ ./secthemall.sh --start -b         # start the client in background
+ ./secthemall.sh --restart          # restart the client in background
+ ./secthemall.sh --stop             # stop the client
+ ./secthemall.sh --gbladd 1.2.3.4   # add 1.2.3.4 to Global Blacklist
 
 ```
 
@@ -117,8 +117,14 @@ It encrypts all collected events using a unique passphrase generated at the firs
 
 ## Authentication
 Once you have successfully completed the registration, the first time you run the client it will ask you to enter your username, password and a server alias.
-Server alias is a name (or a label) that you choose which the client will assign to all collected events.
-An alias can be, for example, something like "my-webserver" or "database1" or "my-application-node1".
+Server alias is a unique name that you choose for your server and it will be assigned to all the events collected from that server.
+An alias could be, for example, something like "my-webserver" or "database1" or "my-application-node1".
+
+A valid alias can contain the following characters:
+
+- Lowercase characters [a-z]
+- Numbers [0-9]
+- Dash character [-]
 
 ```sh
 # ./secthemall.sh --auth
@@ -135,7 +141,9 @@ Insert your secthemall.com Username and Password
 Username: themiddle@secthemall.com
 Password: *********
 
-Server alias, allowed chars [a-zA-Z0-9] and "-" (ex: web-server-1): mywebsite-node1
+Insert Server Alias.
+Allowed chars [a-z0-9] and "-" (ex: web-server-1)
+Alias: mywebsite-node1
 ```
 
 
@@ -147,23 +155,24 @@ Server alias, allowed chars [a-zA-Z0-9] and "-" (ex: web-server-1): mywebsite-no
 
 
 
-## Log type
-SECTHEMALL can collect events from different sources. For doing it, it uses different type of parsers that we call: "logtype".
-Following, a list of supported logtype:
+## Log types
+SECTHEMALL can collect events from different sources using different types of parsers that we call: "logtype".
+Following, a list of supported log types:
 
 <table>
-	<tr><td><b>SSH</b></td> <td>collects all authentication events from sshd</td></tr>
-	<tr><td><b>iptables</b></td> <td>collects events from iptables rule logs (or from UFW)</td></tr>
-	<tr><td><b>nginx_access</b></td> <td>collects events from Nginx access.log (only 40x and 50x HTTP response status)</td></tr>
-	<tr><td><b>netstat</b></td> <td>collects events from the netstat system command</td></tr>
-	<tr><td><b>CEF</b></td> <td>collects events using <b>C</b>ommon <b>E</b>vent <b>F</b>ormat syntax</td></tr>
+	<tr><td><b><i>logtype</i></b></td> <td><i>description</i></td></tr>
+	<tr><td><b>SSH</b></td> <td>authentication events from sshd</td></tr>
+	<tr><td><b>iptables</b></td> <td>iptables rule logs (or UFW)</td></tr>
+	<tr><td><b>nginx_access</b></td> <td>Nginx access.log (only 40x and 50x HTTP response status)</td></tr>
+	<tr><td><b>netstat</b></td> <td>events from the netstat system command</td></tr>
+	<tr><td><b>CEF</b></td> <td>parses events using <b>C</b>ommon <b>E</b>vent <b>F</b>ormat syntax</td></tr>
 </table>
 
 
 
 
 ## Configuration
-`secthemall.sh` needs to be configured to collect events from log files or commands output.
+`secthemall.sh` needs to be configured to collect events from logs files or commands outputs.
 Just edit the file `conf/parser.conf` and follow the instructions inside it. For example:
 
 ```sh
@@ -196,13 +205,12 @@ cmd "netstat" "netstat_listen" "/bin/netstat -ltunp"
 # --------------------------------------------------
 ```
 In this case, the client will look for any interesting log file that could contain ssh logs, web server logs, iptables logs and more.
-It will suggest you a configuration that you can put in `conf/parser.conf` and start to collect events.
-
+It will suggest you a configuration to be included in the file `conf/parser.conf` to start collecting events.
 
 
 
 ## Events from file
-secthemall.sh can read a file and collect events from it, using one of the secthemall parser (logtype). For make the client able to read a file, you need to configure it on `conf/parser.conf` using the following syntax:
+secthemall.sh can read a file and collect events from it using one of the secthemall parser (logtype). For making the client able to read a file, you need to configure it on `conf/parser.conf` using the following syntax:
 ```sh
 <path to file> "<filter>" "<logtype>"
 ```
@@ -218,20 +226,20 @@ Something like: `cat <path to file> | egrep "<filter>"`.
 
 
 # Blacklist
-## Block an IP to all your servers
+## Block an IP on all your servers
 ## Sync a server blacklist
 
 
 # Cloud
 ## Correlation Rules
-## Public Blacklist
-A public blacklist collects all security events, of all SECTHEMALL users, and makes a "bad reputation" database that you could use to block attackers on your servers.
+## SECTHEMALL Blacklists
+A SECTHEMALL blacklists is "bad reputation" database continuosly updated that you could use to block attackers on your servers.
 The purpose of these lists is to prevent attacks before they occur on your servers. For example: if an IP address has already attacked 10 SECTHEMALL users,
 you could take advantage of this information and block the threat before it comes true.
 
 **All IP addresses in these lists will expire after 7 days** from the date of inclusion.
-You just need to click on the "subscribe" button to add this blacklist to one (or all) of your nodes.
-Remember that you'll not receive a notification when an IP goes in any of the following lists.
+You just need to click on the "subscribe" button on secthemall.com to add blacklists to one (or all) of your nodes.
+
 
 # API
 
