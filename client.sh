@@ -69,7 +69,7 @@ if [[ "${1}" == "auth" ]]; then
 	read USERNAME
 	echo -en "Password: "
 	read -s PASSWORD
-	echo -en "\n\nServer alias, allowed chars [a-z0-9] and \"-\" (ex: web-server-1): "
+	echo -en "\n\nInsert Server Alias.\nAllowed chars [a-z0-9] and \"-\" (ex: web-server-1)\nAlias: "
 	read SERVERALIAS
 
 	ALIASISOK=$(echo "${SERVERALIAS}" | egrep "^[a-z0-9\-]+$" | wc -l)
