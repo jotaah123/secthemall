@@ -5,7 +5,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 source ${CDIR}/bash_colors.sh
 
 if [ ! -f "${CDIR}/inc/passphrase" ] && [ ! -f "${CDIR}/passphrase" ]; then
-	labelwa; echo " Passphrase not found, please visit https://secthemall.com/user"
+	labelwa; echo " Passphrase not found, please visit https://secthemall.com/signup/"
 	echo "+"
 	exit 1;
 fi

@@ -55,7 +55,7 @@ rm -rf ${CDIR}/tmp/*
 
 if [[ "${1}" != "auth" ]]; then
 	if [ ! -f "${CDIR}/inc/passphrase" ] && [ ! -f "${CDIR}/passphrase" ]; then
-		labelwa; echo " Passphrase not found, please visit https://secthemall.com/user"
+		labelwa; echo " Passphrase not found, please visit https://secthemall.com/signup/"
 		labelwa; echo -n " If you already have a Username and a Password, run: "; clr_green "${0} auth"
 		echo "+"
 		exit 1;

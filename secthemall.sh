@@ -6,7 +6,7 @@ STAVERSION="secthemall/1.0.6"
 
 if [ ! -f ${CDIR}/inc/username ]; then
 	labeler; echo " No username found."
-	labelin; echo -n " You can get a free account here: "; clr_blueb "https://secthemall.com/user"
+	labelin; echo -n " You can get a free account here: "; clr_blueb "https://secthemall.com/signup/"
 	${CDIR}/client.sh auth
 	exit 0;
 fi
