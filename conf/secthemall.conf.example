@@ -1,7 +1,7 @@
 # (::) SECTHEMALL
 # ----------------
 # Parser configuration file
-# this file must be renamed to: parser.conf
+# this file must be renamed to: secthemall.conf
 # more informations at https://github.com/theMiddleBlue/secthemall
 
 # Reading a log file

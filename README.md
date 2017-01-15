@@ -173,7 +173,7 @@ Following, a list of supported log types:
 
 ## Configuration
 `secthemall.sh` needs to be configured to collect events from logs files or commands outputs.
-Just edit the file `conf/parser.conf` and follow the instructions inside it. For example:
+Just edit the file `conf/secthemall.conf` and follow the instructions inside it. For example:
 
 ```sh
 # this will parse logs in the auth.log with type SSH
@@ -195,7 +195,7 @@ If you want a quick-and-dirty configuration, you could use the `--autoconf` para
 # ./secthemall.sh --autoconf
 + [ INFO   ] Trying to find intresting log files...
 
-# copy under this line and paste in conf/parser.conf
+# copy under this line and paste in conf/secthemall.conf
 # --------------------------------------------------
 /var/log/auth.log "sshd.*password.*" "SSH"
 /var/log/kern.log "MAC.+SRC.+DST.+PROTO.+DPT" "iptables"
@@ -205,12 +205,12 @@ cmd "netstat" "netstat_listen" "/bin/netstat -ltunp"
 # --------------------------------------------------
 ```
 In this case, the client will look for any interesting log file that could contain ssh logs, web server logs, iptables logs and more.
-It will suggest you a configuration to be included in the file `conf/parser.conf` to start collecting events.
+It will suggest you a configuration to be included in the file `conf/secthemall.conf` to start collecting events.
 
 
 
 ## Events from file
-secthemall.sh can read a file and collect events from it using one of the secthemall parser (logtype). For making the client able to read a file, you need to configure it on `conf/parser.conf` using the following syntax:
+secthemall.sh can read a file and collect events from it using one of the secthemall parser (logtype). For making the client able to read a file, you need to configure it on `conf/secthemall.conf` using the following syntax:
 ```sh
 <path to file> "<filter>" "<logtype>"
 ```

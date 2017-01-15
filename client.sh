@@ -87,11 +87,11 @@ if [[ "${1}" == "auth" ]]; then
 		echo -n ${SERVERALIAS} > ${CDIR}/inc/alias
 		echo -e "\n\n"
 
-		if [ ! -f ${CDIR}/conf/parser.conf ]; then
-			labelin; echo " Configuration file not found in ${CDIR}/conf/parser.conf"
+		if [ ! -f ${CDIR}/conf/secthemall.conf ]; then
+			labelin; echo " Configuration file not found in ${CDIR}/conf/secthemall.conf"
 			labelin; echo " Trying to run autoconf..."
-			${CDIR}/inc/autoconf.sh > ${CDIR}/conf/parser.conf
-			labelin; echo " Autoconf completed. Please edit ${CDIR}/conf/parser.conf"
+			${CDIR}/inc/autoconf.sh > ${CDIR}/conf/secthemall.conf
+			labelin; echo " Autoconf completed. Please edit ${CDIR}/conf/secthemall.conf"
 		fi
 
 		labelok; echo " passphrase saved in ${CDIR}/inc/passphrase"
@@ -218,7 +218,7 @@ while true; do
 			#echo "--> exec: ${BASH_REMATCH[3]}"
 			${CDIR}/inc/cmdout.sh "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[3]}"
 		fi
-	done <${CDIR}/conf/parser.conf
+	done <${CDIR}/conf/secthemall.conf
 
 	((++GETUPDATESN))
 

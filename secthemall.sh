@@ -71,10 +71,10 @@ AUTOCONF=$(echo "$@" | egrep -o "\-\-autoconf" | wc -l)
 if [ $AUTOCONF -ge 1 ]; then
 	labelin; echo " Trying to find intresting log files..."
 	echo ""
-	echo "# copy under this line and paste in conf/parser.conf"
-	echo "# --------------------------------------------------"
+	echo "# copy under this line and paste in conf/secthemall.conf"
+	echo "# ------------------------------------------------------"
 	${CDIR}/inc/autoconf.sh
-	echo "# --------------------------------------------------"
+	echo "# ------------------------------------------------------"
 	echo ""
 	exit 0
 fi
