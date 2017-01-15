@@ -90,7 +90,8 @@ if [[ "${1}" == "auth" ]]; then
 		if [ ! -f ${CDIR}/conf/secthemall.conf ]; then
 			labelin; echo " Configuration file not found in ${CDIR}/conf/secthemall.conf"
 			labelin; echo " Trying to run autoconf..."
-			${CDIR}/inc/autoconf.sh > ${CDIR}/conf/secthemall.conf
+			# ${CDIR}/inc/autoconf.sh > ${CDIR}/conf/secthemall.conf
+			${CDIR}/inc/autoconf.sh
 			labelin; echo " Autoconf completed. Please edit ${CDIR}/conf/secthemall.conf"
 		fi
 
