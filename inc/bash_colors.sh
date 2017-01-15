@@ -175,9 +175,9 @@ function clr_dump
 '
 }
 
-function labelin { echo -n "+ "; clr_cyanb  " INFO    " -n; }
-function labelok { echo -n "+ "; clr_greenb " OK      " -n; }
-function labelwa { echo -n "+ "; clr_brownb " WARNING " -n; }
-function labeler { echo -n "+ "; clr_redb   " ERROR   " -n; }
+function labelin { echo -n "+ "; clr_cyanb  clr_black " INFO    " -n; }
+function labelok { echo -n "+ "; clr_greenb clr_black " OK      " -n; }
+function labelwa { echo -n "+ "; clr_brownb clr_black " WARNING " -n; }
+function labeler { echo -n "+ "; clr_redb   clr_black " ERROR   " -n; }
 
-function labelcmd { echo -n "+ "; clr_blueb  " ${1} " -n; }
+function labelcmd { echo -n "+ "; clr_blueb clr_white " ${1} " -n; }

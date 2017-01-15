@@ -4,33 +4,6 @@ CDIR="$( cd "$( dirname "$0" )" && pwd )"
 source ${CDIR}/inc/bash_colors.sh
 STAVERSION="secthemall/1.0.6"
 
-if [ ! -f ${CDIR}/inc/username ]; then
-	labeler; echo " No username found."
-	labelin; echo -n " You can get a free account here: "; clr_blueb "https://secthemall.com/signup/"
-	${CDIR}/client.sh auth
-	exit 0;
-fi
-
-AUTHME=$(echo "$@" | egrep -o "\-\-auth" | wc -l)
-if [ $AUTHME -ge 1 ]; then
-	${CDIR}/client.sh auth
-	exit 0;
-fi
-
-USERNAME=$(cat ${CDIR}/inc/username)
-APIKEY=$(cat ${CDIR}/inc/apikey)
-SALIAS=$(cat ${CDIR}/inc/alias)
-LASTPID=$(cat ${CDIR}/conf/client.pid)
-RUNME=0
-
-if [ -f /etc/timezone ]; then
-	TIMEZONE=$(cat /etc/timezone)
-else
-	labeler; echo " No Time Zone found in /etc/timezone."
-	echo "+"
-	exit 1
-fi
-
 ARGREXHELP=$(echo "$@" | egrep "(\-\-help|\-h)" | wc -l)
 if [ $ARGREXHELP -ge 1 ]; then
 	echo "+"
@@ -65,6 +38,33 @@ if [ $ARGREXHELP -ge 1 ]; then
 	echo " ${0} --gbladd 1.2.3.4   # add 1.2.3.4 to Global Blacklist"
 	echo -en "\n\n"
 	exit 0
+fi
+
+AUTHME=$(echo "$@" | egrep -o "\-\-auth" | wc -l)
+if [ $AUTHME -ge 1 ]; then
+	${CDIR}/client.sh auth
+	exit 0;
+fi
+
+if [ ! -f ${CDIR}/inc/username ]; then
+	labeler; echo " No username found."
+	labelin; echo -n " You can get a free account here: "; clr_blueb "https://secthemall.com/signup/"
+	${CDIR}/client.sh auth
+	exit 0;
+fi
+
+USERNAME=$(cat ${CDIR}/inc/username)
+APIKEY=$(cat ${CDIR}/inc/apikey)
+SALIAS=$(cat ${CDIR}/inc/alias)
+LASTPID=$(cat ${CDIR}/conf/client.pid)
+RUNME=0
+
+if [ -f /etc/timezone ]; then
+	TIMEZONE=$(cat /etc/timezone)
+else
+	labeler; echo " No Time Zone found in /etc/timezone."
+	echo "+"
+	exit 1
 fi
 
 AUTOCONF=$(echo "$@" | egrep -o "\-\-autoconf" | wc -l)
