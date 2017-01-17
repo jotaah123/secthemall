@@ -1,6 +1,6 @@
 # (::) SECTHEMALL
 SECTHEMALL is a bash script that automatically blocks IPs using iptables.
-It distributes and syncs a **blacklist and whitelist on all your linux server**.
+It distributes and syncs a **blacklist and whitelist on all your Linux server**.
 It can store your security logs to the SECTHEMALL Cloud, and makes you able to create **Custom Rules** or **Graphical Reports**.
 With SECTHEMALL you'll block **Brute Force Attacks, Port Scan, Web Vulnerability Scan**, and more...
 
@@ -29,20 +29,21 @@ With SECTHEMALL you'll block **Brute Force Attacks, Port Scan, Web Vulnerability
 
 # Requirements
 SECTHEMALL is centrally orchestrated, so you need a **free** account on secthemall.com but don't worry... 
-it takes just few seconds! Enter your e-mail address and secthemall.com will do the dirty job for you.
+it takes just a few seconds! Enter your e-mail address and secthemall.com will do the dirty job for you.
 
 The first time you run the `secthemall.sh` script, it'll check if all required components are present.
 The following software must be installed:
 
 - **iptables** (yes... Would you believe it?)
-- **openssl** (for encrypting logs before sending them)
+- **OpenSSL** (for encrypting logs before sending them)
 - **curl** (for the SECTHEMALL API)
 - **base64** (for text string encoding)
 
 
 
 # Installation
-You just need to clone the git project and execute the `secthemall.sh` script (it needs root privileges and probably, in some distributions, you should run it using sudo).
+You just need to clone the git project and execute the `secthemall.sh` script (it requires `root` privileges, and probably, in some distributions, you should run it using `sudo`).
+
 ```bash
 $ cd /opt/
 $ clone https://github.com/theMiddleBlue/secthemall.git
@@ -52,13 +53,12 @@ $ ./secthemall.sh -h
 
 
 
-
 # How it works
 ![how it work](https://secthemall.com/img/staentral.001.jpeg)
 
 `secthemall.sh` is a bash script that can read a log file, or the output of a command, and set an iptables rule.
-For example, it could reads your `/var/log/auth.log` and block an IP address that fails the ssh authentication for more then 6 times,
-or it could read the `access.log` of your nginx server and block an IP address that get more then 20 "page not found" errors.
+For example, it could read your `/var/log/auth.log` and block an IP address that fails the ssh authentication for more than six times,
+or it could read the `access.log` of your Nginx server and block an IP address that gets more than 20 "page not found" errors.
 
 Each blocked IP address (both IPv4 or IPv6) is added to an iptables rules chain and blocked (with something like `iptables -s <ipv4> -j DROP`).
 **All blocked IPs will be sent to your global blacklist on secthemall.com and distributed on all your servers that run the secthemall.sh script.**
@@ -66,9 +66,9 @@ Imagine that you have 3 Linux servers: an IP blocked for a brute force attack on
 
 Get a free account on secthemall.com and start using `secthemall.sh` client.
 You'll see all your servers events on the **secthemall online dashboard**, where you can add or remove IPs from your global black or white list.
-You can also get graphical reports, create custom rules, get notified by e-mail or telegram when an IP went in blackist, etc...
+You can also get graphical reports, create custom rules, get notified by e-mail or telegram when an IP went in the blacklist, etc...
 
-`secthemall.sh` needs OpenSSL to encrypt your events before send them to the secthemall cloud.
+`secthemall.sh` needs OpenSSL to encrypt your events before sending them to the secthemall cloud.
 It encrypts all collected events using a unique passphrase generated at the first authentication.
 
 
@@ -116,8 +116,8 @@ It encrypts all collected events using a unique passphrase generated at the firs
 
 
 ## Authentication
-Once you have successfully completed the registration, the first time you run the client it will ask you to enter your username, password and a server alias.
-Server alias is a unique name that you choose for your server and it will be assigned to all the events collected from that server.
+Once you have completed the registration, the first time you run the client it will ask you to enter your username, password and a server alias.
+Server alias is a unique name that you choose for your server, and it will be assigned to all the events collected from that server.
 An alias could be, for example, something like "my-webserver" or "database1" or "my-application-node1".
 
 A valid alias can contain the following characters:
@@ -156,16 +156,16 @@ Alias: mywebsite-node1
 
 
 ## Log types
-SECTHEMALL can collect events from different sources using different types of parsers that we call: "logtype".
+SECTHEMALL can collect events from different sources using various types of parsers that we call: "logtype".
 Following, a list of supported log types:
 
 <table>
-	<tr><td><b><i>logtype</i></b></td> <td><i>description</i></td></tr>
-	<tr><td><b>SSH</b></td> <td>authentication events from sshd</td></tr>
-	<tr><td><b>iptables</b></td> <td>iptables rule logs (or UFW)</td></tr>
-	<tr><td><b>nginx_access</b></td> <td>Nginx access.log (only 40x and 50x HTTP response status)</td></tr>
-	<tr><td><b>netstat</b></td> <td>events from the netstat system command</td></tr>
-	<tr><td><b>CEF</b></td> <td>parses events using <b>C</b>ommon <b>E</b>vent <b>F</b>ormat syntax</td></tr>
+    <tr><td><b><i>logtype</i></b></td> <td><i>description</i></td></tr>
+    <tr><td><b>SSH</b></td> <td>authentication events from sshd</td></tr>
+    <tr><td><b>iptables</b></td> <td>iptables rule logs (or UFW)</td></tr>
+    <tr><td><b>nginx_access</b></td> <td>Nginx access.log (only 40x and 50x HTTP response status)</td></tr>
+    <tr><td><b>netstat</b></td> <td>events from the netstat system command</td></tr>
+    <tr><td><b>CEF</b></td> <td>parses events using <b>C</b>ommon <b>E</b>vent <b>F</b>ormat syntax</td></tr>
 </table>
 
 
@@ -193,7 +193,7 @@ cmd "nginx_access" "my-webserver" "docker exec -t mycontainer grep 404 /usr/loca
 If you want a quick-and-dirty configuration, you could use the `--autoconf` parameter:
 ```sh
 # ./secthemall.sh --autoconf
-+ [ INFO   ] Trying to find intresting log files...
++ [ INFO   ] Trying to find interesting log files...
 
 # copy under this line and paste in conf/secthemall.conf
 # --------------------------------------------------
@@ -205,7 +205,7 @@ cmd "netstat" "netstat_listen" "/bin/netstat -ltunp"
 # --------------------------------------------------
 ```
 In this case, the client will look for any interesting log file that could contain ssh logs, web server logs, iptables logs and more.
-It will suggest you a configuration to be included in the file `conf/secthemall.conf` to start collecting events.
+It will suggest you a configuration to include in the file `conf/secthemall.conf` so it can start collecting the events.
 
 
 
@@ -233,11 +233,9 @@ Something like: `cat <path to file> | egrep "<filter>"`.
 # Cloud
 ## Correlation Rules
 ## SECTHEMALL Blacklists
-A SECTHEMALL blacklists is "bad reputation" database continuosly updated that you could use to block attackers on your servers.
-The purpose of these lists is to prevent attacks before they occur on your servers. For example: if an IP address has already attacked 10 SECTHEMALL users,
-you could take advantage of this information and block the threat before it comes true.
+SECTHEMALL Blacklists is a continuously updated database of bad reputation IP addresses. It allows you to block all potential attackers on your servers preemptively. For example: if an IP address has already attacked ten SECTHEMALL users, you could take advantage of this information and block the threat before it attacks your server.
 
-**All IP addresses in these lists will expire after 7 days** from the date of inclusion.
+**All IP addresses in these lists will expire after seven days** from the date of inclusion.
 You just need to click on the "subscribe" button on secthemall.com to add blacklists to one (or all) of your nodes.
 
 
