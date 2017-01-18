@@ -15,6 +15,19 @@ if [ $SSHLOGS -ge 1 ]; then
 	done
 fi
 
+FAIL2BANLOGS=$(egrep -isH '.*fail2ban.*' /var/log/*.log | awk 'BEGIN{FS=":"}{print $1}' | sort | uniq | wc -l)
+if [ $SSHLOGS -ge 1 ]; then
+	for lfile in `egrep -isH '.*fail2ban.*' /var/log/*.log | awk 'BEGIN{FS=":"}{print $1}' | sort | uniq`; do
+		echo -e "\n+ Found Fail2ban logs in ${lfile}"
+		echo -n "+ Do you want to add it on secthemall.conf? [Y/n] "
+		read LOGRES
+		LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes)$" | wc -l);
+		if [ $LOGRESOUT -ge 1 ]; then
+			CONFOUT[1]=$(echo ${lfile} '".*fail2ban.*Ban.*"' '"fail2ban"')
+		fi
+	done
+fi
+
 IPTABLESLOGS=$(egrep -sH 'MAC.+SRC.+DST.+PROTO.+DPT' /var/log/*.log | awk 'BEGIN{FS=":"}{print $1}' | sort | uniq | wc -l)
 if [ $IPTABLESLOGS -ge 1 ]; then
 	for lfile in `egrep -sH 'MAC.+SRC.+DST.+PROTO.+DPT' /var/log/*.log | awk 'BEGIN{FS=":"}{print $1}' | sort | uniq`; do
