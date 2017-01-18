@@ -85,7 +85,7 @@ if [ $NETSTATLOG -ge 1 ]; then
 fi
 
 FAIL2BANLOGS=$(egrep -isH '.*fail2ban.*' /var/log/*.log | awk 'BEGIN{FS=":"}{print $1}' | sort | uniq | wc -l)
-if [ $SSHLOGS -ge 1 ]; then
+if [ $FAIL2BANLOGS -ge 1 ]; then
 	for lfile in `egrep -isH '.*fail2ban.*' /var/log/*.log | awk 'BEGIN{FS=":"}{print $1}' | sort | uniq`; do
 		echo -e "\n+ Found Fail2ban logs in ${lfile}"
 		echo -n "+ Do you want to add it on secthemall.conf? [Y/n] "
