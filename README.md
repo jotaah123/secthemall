@@ -16,6 +16,9 @@ With SECTHEMALL you'll block **Brute Force Attacks, Port Scan, Web Vulnerability
   - [Autoconfig](#autoconfig)
   - Events from file
   - Read command outputs
+- Fail2ban
+  - jail configuration
+  - action configuration
 - Blacklist
   - Block an IP on all your servers
   - Sync a server blacklist
@@ -223,6 +226,45 @@ Something like: `cat <path to file> | egrep "<filter>"`.
 
 
 ## Read command output
+
+
+# Fail2ban
+SECTHEMALL is also compatible with fail2ban: You can integrate all ban made by fail2ban in your global blacklist and distribute it to all your nodes.
+For doing it, you just need to create a fail2ban action and assign it to your jail. For Example:
+
+
+## Fail2ban action configuration
+On Ubuntu, for example, i can create the file `/etc/fail2ban/action.d/secthemall.conf` with the following configuration:
+```
+[Definition]
+
+# ban using --gbladd parameter of secthemall.sh script
+actionban = /opt/secthemall/secthemall.sh --gbladd <ip>
+
+# unban using --gbldel parameter of secthemall.sh script
+actionunban = /opt/secthemall/secthemall.sh --gbldel <ip>
+
+actionstart =
+actionstop =
+actioncheck =
+```
+
+## Fail2ban jail configuration
+Once you configure the `secthemall` action, you can assign it to your jail configuration. For example:
+```
+[ssh]
+
+enabled  = true
+filter   = sshd
+action   = iptables[name=SSH, port=ssh, protocol=tcp]
+           secthemall
+logpath  = /var/log/auth.log
+maxretry = 3
+```
+
+Now you can restart fail2ban (with something like `/etc/init.d/fail2ban restart`).
+From this moment, whenever Fail2ban blocks (or unblocks) an IP address, it will be distributed to all your secthemall nodes.
+
 
 
 # Blacklist
