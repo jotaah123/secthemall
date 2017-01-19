@@ -166,8 +166,9 @@ Following, a list of supported log types:
     <tr><td><b><i>logtype</i></b></td> <td><i>description</i></td></tr>
     <tr><td><b>SSH</b></td> <td>authentication events from sshd</td></tr>
     <tr><td><b>iptables</b></td> <td>iptables rule logs (or UFW)</td></tr>
-    <tr><td><b>nginx_access</b></td> <td>Nginx access.log (only 40x and 50x HTTP response status)</td></tr>
+    <tr><td><b>HTTP</b></td> <td>Web server access.log (only 40x and 50x HTTP response status)</td></tr>
     <tr><td><b>netstat</b></td> <td>events from the netstat system command</td></tr>
+    <tr><td><b>fail2ban</b></td> <td>events from fail2ban log file</td></tr>
     <tr><td><b>CEF</b></td> <td>parses events using <b>C</b>ommon <b>E</b>vent <b>F</b>ormat syntax</td></tr>
 </table>
 
