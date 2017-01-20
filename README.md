@@ -16,9 +16,9 @@ With SECTHEMALL you'll block **Brute Force Attacks, Port Scan, Web Vulnerability
   - [Autoconfig](#autoconfig)
   - Events from file
   - Read command outputs
-- Fail2ban
-  - jail configuration
-  - action configuration
+- [Fail2ban](#fail2ban)
+  - [Action configuration](#fail2ban-action-configuration)
+  - [Jail configuration](#fail2ban-jail-configuration)
 - Blacklist
   - Block an IP on all your servers
   - Sync a server blacklist
