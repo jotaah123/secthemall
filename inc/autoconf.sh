@@ -36,9 +36,9 @@ if [ $NGINXLOGS1 -ge 1 ]; then
 		read LOGRES
 		LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes)$" | wc -l);
 		if [ $LOGRESOUT -ge 1 ]; then
-			CONFOUT[3]=$(echo ${lfile} '"HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} "' '"nginx_access"')
+			CONFOUT[3]=$(echo ${lfile} '"HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} "' '"HTTP"')
 		fi
-		#echo ${lfile} '"HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} "' '"nginx_access"'
+		#echo ${lfile} '"HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} "' '"HTTP"'
 	done
 fi
 
@@ -50,9 +50,9 @@ if [ $NGINXLOGS2 -ge 1 ]; then
 		read LOGRES
 		LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes)$" | wc -l);
 		if [ $LOGRESOUT -ge 1 ]; then
-			CONFOUT[4]=$(echo ${lfile} '"HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} "' '"nginx_access"')
+			CONFOUT[4]=$(echo ${lfile} '"HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} "' '"HTTP"')
 		fi
-		#echo ${lfile} '"HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} "' '"nginx_access"'
+		#echo ${lfile} '"HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} "' '"HTTP"'
 	done
 fi
 
@@ -64,9 +64,9 @@ if [ $NGINXLOGS3 -ge 1 ]; then
 		read LOGRES
 		LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes)$" | wc -l);
 		if [ $LOGRESOUT -ge 1 ]; then
-			CONFOUT[5]=$(echo ${lfile} '"HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} "' '"nginx_access"')
+			CONFOUT[5]=$(echo ${lfile} '"HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} "' '"HTTP"')
 		fi
-		#echo ${lfile} '"HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} "' '"nginx_access"'
+		#echo ${lfile} '"HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} "' '"HTTP"'
 	done
 fi
 

@@ -24,13 +24,14 @@
 #
 # Log type:
 # you can choose one of the following log types:
-# SSH, iptables, nginx_access, netstat
+# SSH, iptables, HTTP, netstat, fail2ban, CEF
 #
 # - SSH          = parse ssh authentication logs
 # - iptables     = parse iptables rule logs (or ufw logs) 
-# - nginx_access = parse logs in the nginx access.log
+# - HTTP         = parse logs in the nginx access.log
 # - netstat      = parse the output of the netstat command
 # - CEF          = parse a CEF syntax
+# - fail2ban     = parse fail2ban logs
 
 # Prse a command output:
 # ----------------------
@@ -40,13 +41,13 @@
 # cmd "<log type>" "<stat name>" "<cmd -args>"
 #
 # cmd            = say to the client to read a command stdout
-# <log type>     = can be: SSH, iptables, nginx_access, netstat, custom, etc...
+# <log type>     = can be: SSH, iptables, HTTP, netstat, custom, etc...
 # <stat name>    = choose a name for the status file, for example: "myscript-output"
 # <cmd -args>    = the command with all its arguments
 #
 # For example:
 # cmd "netstat" "mynetstat" "/bin/netstat -ltunp"
-# cmd "nginx_access" "my-webserver" "docker exec -t mycontainer grep 404 /usr/local/nginx/logs/access.log"
+# cmd "HTTP" "my-webserver" "docker exec -t mycontainer grep 404 /usr/local/nginx/logs/access.log"
 #
 # Docker exec:
 # you can get output from a command in any of your docker containers.
@@ -60,4 +61,4 @@
 
 cmd "netstat" "netstat_listen" "netstat -ltunp"
 
-cmd "nginx_access" "mycontainer-nginx-access" "docker exec -t mycontainer grep 404 /usr/local/nginx/logs/access.log"
+cmd "HTTP" "mycontainer-nginx-access" "docker exec -t mycontainer grep 404 /usr/local/nginx/logs/access.log"
