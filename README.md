@@ -187,7 +187,7 @@ Just edit the file `conf/secthemall.conf` and follow the instructions inside it.
 cmd "netstat" "mynetstat" "/bin/netstat -ltunp"
 
 # this will read the access.log inside a docker container
-cmd "nginx_access" "my-webserver" "docker exec -t mycontainer grep 404 /usr/local/nginx/logs/access.log"
+cmd "HTTP" "my-webserver" "docker exec -t mycontainer grep 404 /usr/local/nginx/logs/access.log"
 ```
 
 
@@ -204,7 +204,7 @@ If you want a quick-and-dirty configuration, you could use the `--autoconf` para
 /var/log/auth.log "sshd.*password.*" "SSH"
 /var/log/kern.log "MAC.+SRC.+DST.+PROTO.+DPT" "iptables"
 /var/log/ufw.log "MAC.+SRC.+DST.+PROTO.+DPT" "iptables"
-/var/log/nginx/access.log "HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} " "nginx_access"
+/var/log/nginx/access.log "HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} " "HTTP"
 cmd "netstat" "netstat_listen" "/bin/netstat -ltunp"
 # --------------------------------------------------
 ```
