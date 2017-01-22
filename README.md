@@ -276,6 +276,7 @@ From this moment, whenever Fail2ban blocks (or unblocks) an IP address, it will 
 
 # Cloud
 ## Infrastructure
+![Infrastructure](https://secthemall.com/img/globemap.001.jpeg)
 
 ## Correlation Rules
 ## SECTHEMALL Blacklists
