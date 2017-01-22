@@ -236,7 +236,7 @@ For doing it, you just need to create a fail2ban action and assign it to your ja
 
 
 ## Fail2ban action configuration
-On Ubuntu, for example, i can create the file `/etc/fail2ban/action.d/secthemall.conf` with the following configuration:
+On Ubuntu, create the file `/etc/fail2ban/action.d/secthemall.conf` with the following configuration:
 ```
 [Definition]
 
