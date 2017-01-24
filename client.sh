@@ -79,7 +79,7 @@ if [[ "${1}" == "auth" ]]; then
 		exit 1;
 	fi
 
-	USERID=$(curl -s -d "a=auth&username=${USERNAME}&password=${PASSWORD}&alias=${SERVERALIAS}" 'https://secthemall.com/auth.php')
+	USERID=$(curl -s -d "a=auth&username=${USERNAME}&password=${PASSWORD}&alias=${SERVERALIAS}" 'https://secthemall.com/auth/')
 	if [[ "${USERID:0:2}" == "ok" ]]; then
 		echo -n ${USERID:3:64} > ${CDIR}/inc/passphrase
 		echo -n ${USERID:74} > ${CDIR}/inc/apikey
