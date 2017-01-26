@@ -1,8 +1,8 @@
 # (::) SECTHEMALL
-SECTHEMALL is a bash script that automatically blocks IPs using iptables.
-It distributes and syncs a **blacklist and whitelist on all your Linux server**.
-It can store your security logs to the SECTHEMALL Cloud, and makes you able to create **Custom Rules** or **Graphical Reports**.
-With SECTHEMALL you'll block **Brute Force Attacks, Port Scan, Web Vulnerability Scan**, and more...
+SECTHEMALL is a Bash script that automatically blocks IP's using iptables.
+It distributes and syncs **a blacklist and a whitelist on all your Linux servers**.
+It can store your security logs to the SECTHEMALL Cloud, and let's you create **Custom Rules** and **Graphical Reports**.
+With SECTHEMALL you'll block **Brute Force Attacks, Port Scans, Web Vulnerability Scans** and more...
 
 # Index
 - Requirements
@@ -60,16 +60,16 @@ $ ./secthemall.sh -h
 # How it works
 ![how it work](https://secthemall.com/img/staentral.001.jpeg)
 
-`secthemall.sh` is a bash script that can read a log file, or the output of a command, and set an iptables rule.
+`secthemall.sh` is a Bash script that can read a log file, or the output of a command, and set an iptables rule.
 For example, it could read your `/var/log/auth.log` and block an IP address that fails the ssh authentication for more than six times,
 or it could read the `access.log` of your Nginx server and block an IP address that gets more than 20 "page not found" errors.
 
 Each blocked IP address (both IPv4 or IPv6) is added to an iptables rules chain and blocked (with something like `iptables -s <ipv4> -j DROP`).
-**All blocked IPs will be sent to your global blacklist on secthemall.com and distributed on all your servers that run the secthemall.sh script.**
+**All blocked IP's will be sent to your global blacklist on secthemall.com and distributed on all your servers that run the secthemall.sh script.**
 Imagine that you have 3 Linux servers: an IP blocked for a brute force attack on the server A will be automatically blocked on servers B and C.
 
 Get a free account on secthemall.com and start using `secthemall.sh` client.
-You'll see all your servers events on the **secthemall online dashboard**, where you can add or remove IPs from your global black or white list.
+You'll see all your servers events on the **secthemall online dashboard**, where you can add or remove IP's from your global black or white list.
 You can also get graphical reports, create custom rules, get notified by e-mail or telegram when an IP went in the blacklist, etc...
 
 `secthemall.sh` needs OpenSSL to encrypt your events before sending them to the secthemall cloud.
@@ -232,7 +232,7 @@ Something like: `cat <path to file> | egrep "<filter>"`.
 
 # Fail2ban
 SECTHEMALL is also compatible with fail2ban: You can integrate all ban made by fail2ban in your global blacklist and distribute it to all your nodes.
-For doing it, you just need to create a fail2ban action and assign it to your jail. For Example:
+For doing it, you just need to create a fail2ban action and assign it to your jail. For example:
 
 
 ## Fail2ban action configuration
