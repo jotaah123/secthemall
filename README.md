@@ -5,17 +5,17 @@ It can store your security logs to the SECTHEMALL Cloud, and let's you create **
 With SECTHEMALL you'll block **Brute Force Attacks, Port Scans, Web Vulnerability Scans** and more...
 
 # Index
-- Requirements
-- Installation
+- [Requirements](#requirements)
+- [Installation](#installation)
 - [How it works](#how-it-works)
   - [How the client works](#how-the-client-works)
   - [Authentication](#authentication)
   - [Run the secthemall.sh client](#run-the-secthemallsh-client)
-  - Log types
+  - [Log types](#log-types)
   - [Configuration](#configuration)
   - [Autoconfig](#autoconfig)
-  - Events from file
-  - Read command outputs
+  - [Events from file](#events-from-file)
+  - [Read command outputs](#read-command-output)
 - [Fail2ban](#fail2ban)
   - [Action configuration](#fail2ban-action-configuration)
   - [Jail configuration](#fail2ban-jail-configuration)
