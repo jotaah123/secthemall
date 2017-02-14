@@ -121,6 +121,12 @@ if [ $LWLSHOW -ge 1 ]; then
 	exit 0
 fi
 
+SLJSON=$(echo "$@" | egrep -o "\-\-sendlog\-json" | wc -l)
+if [ $SLJSON -ge 1 ]; then
+	echo "$@"
+	exit 0
+fi
+
 CLIENTISRUNNING=$(ps aux | grep "${LASTPID}" | grep -v grep | wc -l)
 
 if [ -d "/proc/${LASTPID}" ]; then

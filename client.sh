@@ -9,7 +9,7 @@ echo "+"
 echo "+ (::) SECTHEMALL"
 echo "+"
 
-labelin; echo -n " Initializing Security Dashboard client on "; clr_blue ${CDIR}
+labelin; echo -n " Initializing SECTHEMALL client on "; clr_blue ${CDIR}
 labelin; echo -n " With PID "; clr_green "$$ " -n; echo -n "saved in "; clr_blue "${CDIR}/conf/client.pid"
 echo "+"
 
