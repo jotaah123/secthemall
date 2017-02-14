@@ -79,11 +79,12 @@ if [ $AUTOCONF -ge 1 ]; then
 	exit 0
 fi
 
-GETLOG=$(echo "$@" | egrep -o "\-\-getlogs \-q (.+)" | wc -l)
+GETLOG=$(echo "$@" | egrep -o "\-\-getlogs (.+)" | wc -l)
 if [ $GETLOG -ge 1 ]; then
-	QUERY=$(echo "$@" | egrep -o "(f\[.+)")
-	curl -A "${STAVERSION}" -s -d "a=getlogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&${QUERY}" "https://secthemall.com/api/v1/"
-	echo ""
+	#QUERY=$(echo "$@" | egrep -o "(f\[.+)")
+	QUERY="${2}";
+	curl -A "${STAVERSION}" -s -d "a=getlogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&f[raw]=${QUERY}" "https://secthemall.com/api/v1/"
+	#echo "${1} ${2}"
 	exit 0
 fi
 
