@@ -110,6 +110,12 @@ if [ $GBLSHOW -ge 1 ]; then
 	exit 0
 fi
 
+GWLSHOW=$(echo "$@" | egrep -o "\-\-gwlshow" | wc -l)
+if [ $GWLSHOW -ge 1 ]; then
+	curl -s -A "${STAVERSION}" -d "a=gwlshow&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}" "https://secthemall.com/api/v1/"
+	exit 0
+fi
+
 LBLSHOW=$(echo "$@" | egrep -o "\-\-lblshow" | wc -l)
 if [ $LBLSHOW -ge 1 ]; then
 	iptables -L secthemall-blacklist -n
