@@ -98,19 +98,18 @@ It encrypts all collected events using a unique passphrase generated at the firs
 +  --lblshow           Show Local Blacklist (iptables)
 +  --lwlshow           Show Local Whitelist (iptables)
 +
-+  --getlogs [-q ...]  Get collected logs from all nodes (json)
++  --getlogs <search>  Get collected logs from all nodes (json)
 +
 
 
  Examples usage:
- ./secthemall.sh --start -b         # start the client in background
- ./secthemall.sh --restart          # restart the client in background
- ./secthemall.sh --stop             # stop the client
- ./secthemall.sh --gbladd 1.2.3.4   # add 1.2.3.4 to Global Blacklist
+ ./secthemall.sh --start -b                                  # start the client in background
+ ./secthemall.sh --restart                                   # restart the client in background
+ ./secthemall.sh --stop                                      # stop the client
+ ./secthemall.sh --gbladd 1.2.3.4                            # add 1.2.3.4 to Global Blacklist
+ ./secthemall.sh --getlogs "ssh and geo.countryname:china"   # add 1.2.3.4 to Global Blacklist
 
 ```
-
-### secthemall.sh is not a Remote Control!
 
 
 
