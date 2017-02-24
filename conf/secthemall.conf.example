@@ -24,13 +24,12 @@
 #
 # Log type:
 # you can choose one of the following log types:
-# SSH, iptables, HTTP, netstat, fail2ban, CEF
+# SSH, iptables, HTTP, netstat, fail2ban
 #
 # - SSH          = parse ssh authentication logs
 # - iptables     = parse iptables rule logs (or ufw logs) 
 # - HTTP         = parse logs in the nginx access.log
 # - netstat      = parse the output of the netstat command
-# - CEF          = parse a CEF syntax
 # - fail2ban     = parse fail2ban logs
 
 # Prse a command output:
