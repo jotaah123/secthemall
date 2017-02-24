@@ -45,7 +45,7 @@ You just need to clone the git project and execute the `secthemall.sh` script (i
 
 ```bash
 $ cd /opt/
-$ clone https://github.com/theMiddleBlue/secthemall.git
+$ git clone https://github.com/theMiddleBlue/secthemall.git
 $ cd secthemall/
 $ ./secthemall.sh -h
 ```
