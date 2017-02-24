@@ -264,16 +264,11 @@ From this moment, whenever Fail2ban blocks (or unblocks) an IP address, it will 
 
 
 
-# Blacklist
-## Block an IP on all your servers
-## Sync a server blacklist
-
 
 # Cloud
 ## Infrastructure
 ![Infrastructure](https://secthemall.com/img/globemap.001.jpeg?nocache=1)
 
-## Correlation Rules
 ## SECTHEMALL Blacklists
 SECTHEMALL Blacklists is a continuously updated database of bad reputation IP addresses. It allows you to block all potential attackers on your servers preemptively. For example: if an IP address has already attacked ten SECTHEMALL users, you could take advantage of this information and block the threat before it attacks your server.
 
