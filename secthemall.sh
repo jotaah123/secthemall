@@ -29,7 +29,7 @@ if [ $ARGREXHELP -ge 1 ]; then
 	labelcmd "--lwlshow"; echo "          Show Local Whitelist (iptables)"
 	echo "+"
 
-	labelcmd "--getlogs [-q ...]"; echo " Get collected logs from all nodes (json)"
+	labelcmd "--getlogs <search>"; echo " Get collected logs from all nodes (json)"
 	echo "+"
 	echo -en "\n\n Example usage:\n"
 	echo " ${0} --start -b         # start the client in background"
@@ -83,7 +83,7 @@ GETLOG=$(echo "$@" | egrep -o "\-\-getlogs (.+)" | wc -l)
 if [ $GETLOG -ge 1 ]; then
 	#QUERY=$(echo "$@" | egrep -o "(f\[.+)")
 	QUERY="${2}";
-	curl -A "${STAVERSION}" -s -d "a=getlogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&f[raw]=${QUERY}" "https://secthemall.com/api/v1/"
+	curl -A "${STAVERSION}" -s -d "a=getlogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&search=${QUERY}" "https://secthemall.com/api/v1/"
 	#echo "${1} ${2}"
 	exit 0
 fi

@@ -19,14 +19,9 @@ With SECTHEMALL you'll block **Brute Force Attacks, Port Scans, Web Vulnerabilit
 - [Fail2ban](#fail2ban)
   - [Action configuration](#fail2ban-action-configuration)
   - [Jail configuration](#fail2ban-jail-configuration)
-- Blacklist
-  - Block an IP on all your servers
-  - Sync a server blacklist
 - Cloud
   - [Infrastructure](#infrastructure)
-  - Custom Rules
-  - SECTHEMALL Blacklists
-- API
+- [API](#API)
 
 
 
@@ -287,6 +282,7 @@ You just need to click on the "subscribe" button on secthemall.com to add blackl
 
 
 # API
+[https://secthemall.com/api/](https://secthemall.com/api/)
 
 
 # Thanks to
