@@ -69,6 +69,7 @@ if [[ "${1}" == "auth" ]]; then
 	read USERNAME
 	echo -en "Password: "
 	read -s PASSWORD
+	ENCODEDPASSWD=$(echo ${PASSWORD} | sed -e 's/"/\"/g')
 	echo -en "\n\nInsert Server Alias.\nAllowed chars [a-z0-9] and \"-\" (ex: web-server-1)\nAlias: "
 	read SERVERALIAS
 
@@ -79,7 +80,7 @@ if [[ "${1}" == "auth" ]]; then
 		exit 1;
 	fi
 
-	USERID=$(curl -s -d "a=auth&username=${USERNAME}&password=${PASSWORD}&alias=${SERVERALIAS}" 'https://secthemall.com/auth/')
+	USERID=$(curl -s -d "a=auth&username=${USERNAME}&password=${ENCODEDPASSWD}&alias=${SERVERALIAS}" 'https://secthemall.com/auth/')
 	if [[ "${USERID:0:2}" == "ok" ]]; then
 		echo -n ${USERID:3:64} > ${CDIR}/inc/passphrase
 		echo -n ${USERID:74} > ${CDIR}/inc/apikey
