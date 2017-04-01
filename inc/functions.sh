@@ -13,7 +13,7 @@ fi
 PASSPHRASE=$(cat ${CDIR}/passphrase)
 MYHOSTNAME=$(hostname | base64 -w0)
 MYIPADDR=$(hostname -I | base64 -w0)
-STAVERSION="secthemall/1.0.6"
+STAVERSION="secthemall/1.0.7"
 
 if [ -f /etc/timezone ]; then
 	TIMEZONE=$(cat /etc/timezone)
