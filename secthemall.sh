@@ -2,7 +2,29 @@
 
 CDIR="$( cd "$( dirname "$0" )" && pwd )"
 source ${CDIR}/inc/bash_colors.sh
-STAVERSION="secthemall/1.0.6"
+STAVERSION="secthemall/1.0.7"
+
+if [ -f /etc/timezone ]; then
+	TIMEZONE=$(cat /etc/timezone)
+	labelin; echo " Time Zone set to ${TIMEZONE}"
+else
+	echo "+"
+	labeler; echo " No Time Zone found in /etc/timezone."
+	labeler; echo " Please, configure system Time Zone"
+	labeler; echo " and sync system date and time."
+	echo "+"
+	exit 1
+fi
+
+if [ "${TIMEZONE}" == "" ]; then
+	echo "+"
+	labeler; echo " No Time Zone found in /etc/timezone."
+	labeler; echo " Please, configure system Time Zone"
+	labeler; echo " and sync system date and time."
+	echo "+"
+	exit 1
+fi
+
 
 ARGREXHELP=$(echo "$@" | egrep "(\-\-help|\-h)" | wc -l)
 if [ $ARGREXHELP -ge 1 ]; then
@@ -58,14 +80,6 @@ APIKEY=$(cat ${CDIR}/inc/apikey)
 SALIAS=$(cat ${CDIR}/inc/alias)
 LASTPID=$(cat ${CDIR}/conf/client.pid)
 RUNME=0
-
-if [ -f /etc/timezone ]; then
-	TIMEZONE=$(cat /etc/timezone)
-else
-	labeler; echo " No Time Zone found in /etc/timezone."
-	echo "+"
-	exit 1
-fi
 
 AUTOCONF=$(echo "$@" | egrep -o "\-\-autoconf" | wc -l)
 if [ $AUTOCONF -ge 1 ]; then
