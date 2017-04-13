@@ -106,16 +106,18 @@ if [[ "${1}" == "auth" ]]; then
 	fi
 fi
 
-if [ -f /etc/timezone ]; then
-	TIMEZONE=$(cat /etc/timezone)
-	DATEANDTIME=$(date)
-	labelin; echo " Current Timezone for this node is: ${TIMEZONE}"
-	labelin; echo " Current date and time: ${DATEANDTIME}"
-	echo "+"
+if [ ! -f ${CDIR}/inc/timezone ]; then
+	selectTimeZone
+	if [ -f ${CDIR}/inc/timezone ]; then
+		TIMEZONE=$(cat ${CDIR}/inc/timezone)
+		labelok; echo -en " Configured TimeZone: "; clr_blueb clr_white " ${TIMEZONE} ";
+	else
+		labeler; echo " No TimeZone selected."
+		exit 1
+	fi
 else
-	labeler; echo " No Time Zone found in /etc/timezone."
-	echo "+"
-	exit 1
+	TIMEZONE=$(cat ${CDIR}/inc/timezone)
+	labelok; echo -en " Configured TimeZone: "; clr_blueb clr_white " ${TIMEZONE} ";
 fi
 
 

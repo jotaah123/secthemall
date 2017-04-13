@@ -4,16 +4,23 @@ CDIR="$( cd "$( dirname "$0" )" && pwd )"
 source ${CDIR}/inc/bash_colors.sh
 STAVERSION="secthemall/1.0.7"
 
-if [ -f /etc/timezone ]; then
-	TIMEZONE=$(cat /etc/timezone)
-	labelin; echo " Time Zone set to ${TIMEZONE}"
+if [ ! -f ${CDIR}/inc/timezone ]; then
+	echo "+"
+	echo "+ (::) SECTHEMALL"
+	echo "+"
+	labelin; echo " Welcome to SECTHEMALL!"
+	labelin; echo " Please, select your Time Zone"
+	selectTimeZone
+	if [ -f ${CDIR}/inc/timezone ]; then
+		TIMEZONE=$(cat ${CDIR}/inc/timezone)
+		labelok; echo -en " Configured TimeZone: "; clr_blueb clr_white " ${TIMEZONE} ";
+	else
+		labeler; echo " No TimeZone selected."
+		exit 1
+	fi
 else
-	echo "+"
-	labeler; echo " No Time Zone found in /etc/timezone."
-	labeler; echo " Please, configure system Time Zone"
-	labeler; echo " and sync system date and time."
-	echo "+"
-	exit 1
+	TIMEZONE=$(cat ${CDIR}/inc/timezone)
+	labelok; echo -en " Configured TimeZone: "; clr_blueb clr_white " ${TIMEZONE} ";
 fi
 
 if [ "${TIMEZONE}" == "" ]; then

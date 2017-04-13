@@ -7,4 +7,5 @@ inc/alias
 inc/apikey
 inc/passphrase
 inc/username
+inc/timezone
 build.sh
