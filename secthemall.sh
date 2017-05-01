@@ -2,6 +2,7 @@
 
 CDIR="$( cd "$( dirname "$0" )" && pwd )"
 source ${CDIR}/inc/bash_colors.sh
+source ${CDIR}/inc/selecttimezone.sh
 STAVERSION="secthemall/1.0.7"
 
 if [ ! -f ${CDIR}/inc/timezone ]; then
