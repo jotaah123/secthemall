@@ -19,6 +19,7 @@ IPTABLESLOGS=$(egrep -sH 'MAC.+SRC.+DST.+PROTO.+DPT' /var/log/*.log | awk 'BEGIN
 if [ $IPTABLESLOGS -ge 1 ]; then
 	for lfile in `egrep -sH 'MAC.+SRC.+DST.+PROTO.+DPT' /var/log/*.log | awk 'BEGIN{FS=":"}{print $1}' | sort | uniq`; do
 		echo -e "\n+ Found iptables logs in ${lfile}"
+		echo "+ WARNING: This could generate a lot of logs."
 		echo -n "+ Do you want to add it on secthemall.conf? [Y/n] "
 		read LOGRES
 		LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes)$" | wc -l);
