@@ -17,7 +17,7 @@ STAVERSION="secthemall/1.0.7"
 
 if [ -f /etc/timezone ]; then
 	TIMEZONE=$(cat /etc/timezone)
-	labelin; echo " Time Zone set to ${TIMEZONE}"
+	# labelin; echo " Time Zone set to ${TIMEZONE}"
 else
 	echo "+"
 	labeler; echo " No Time Zone found in /etc/timezone."
