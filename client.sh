@@ -194,6 +194,7 @@ ${CDIR}/inc/getblacklist.sh
 
 labelin; echo " checking for firewall rules updates..."
 ${CDIR}/inc/getupdates.sh
+${CDIR}/inc/getcountries.sh
 GETUPDATESN=0
 
 while true; do
