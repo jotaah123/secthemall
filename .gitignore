@@ -8,4 +8,5 @@ inc/apikey
 inc/passphrase
 inc/username
 inc/timezone
+inc/countrylu
 build.sh

@@ -200,6 +200,7 @@ while true; do
 	if [ $GETUPDATESN -eq 5 ]; then
 		labelin; echo " checking for firewall rules updates..."
 		${CDIR}/inc/getupdates.sh
+		${CDIR}/inc/getcountries.sh
 		GETUPDATESN=0
 	fi
 
