@@ -33,7 +33,7 @@ if [ ! -f ${CDIR}/countrylu ]; then
 	get_countries_blocks
 else
 	CLASTUPDATEMS=$(cat ${CDIR}/countrylu)
-	if [ $COUNTRYLASTUPDATE -ne $CLASTUPDATEMS ]; then
+	if [[ $COUNTRYLASTUPDATE -ne $CLASTUPDATEMS ]]; then
 		echo -en "${COUNTRYLASTUPDATE}" > ${CDIR}/countrylu
 		get_countries_blocks
 	fi
