@@ -138,6 +138,22 @@ if [ $GWLSHOW -ge 1 ]; then
 	exit 0
 fi
 
+GWLADD=$(echo "$@" | egrep -o "\-\-gwladd ([0-9\.]+|[0-9a-fA-F]+\:[0-9a-fA-F\:]+)(\/[0-9]+|)" | wc -l)
+if [ $GWLADD -ge 1 ]; then
+	IP=$(echo "$@" | egrep -o "([0-9\.]+|[0-9a-fA-F]+\:[0-9a-fA-F\:]+)(\/[0-9]+|)")
+	labelin; echo -n " Sending "; clr_blueb "${IP}" -n; echo " to Global Whitelist..."
+	curl -A "${STAVERSION}" -d "a=gwl&action=add&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&alias=${SALIAS}&ip=${IP}" "https://secthemall.com/api/v1/"
+	exit 0
+fi
+
+GWLDEL=$(echo "$@" | egrep -o "\-\-gwldel ([0-9\.]+|[0-9a-fA-F]+\:[0-9a-fA-F\:]+)(\/[0-9]+|)" | wc -l)
+if [ $GWLDEL -ge 1 ]; then
+	IP=$(echo "$@" | egrep -o "([0-9\.]+|[0-9a-fA-F]+\:[0-9a-fA-F\:]+)(\/[0-9]+|)")
+	labelin; echo -n " Removing "; clr_blueb "${IP}" -n; echo " from Global Whitelist..."
+	curl -A "${STAVERSION}" -d "a=gwl&action=del&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&alias=${SALIAS}&ip=${IP}" "https://secthemall.com/api/v1/"
+	exit 0
+fi
+
 LBLSHOW=$(echo "$@" | egrep -o "\-\-lblshow" | wc -l)
 if [ $LBLSHOW -ge 1 ]; then
 	iptables -L secthemall-blacklist -n
