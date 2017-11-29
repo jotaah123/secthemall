@@ -37,7 +37,7 @@ if [ "${TIMEZONE}" == "" ]; then
 fi
 
 function sdash_encrypt {
-	cat $1 | openssl enc -aes-128-cbc -base64 -md md5 -A -salt pass pass:$PASSPHRASE
+	cat $1 | openssl enc -e -aes-128-cbc -base64 -md md5 -A -salt -pass pass:$PASSPHRASE
 }
 
 function sdash_decrypt {
