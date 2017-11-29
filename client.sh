@@ -69,7 +69,7 @@ if [[ "${1}" == "auth" ]]; then
 	read USERNAME
 	echo -en "Password: "
 	read -s PASSWORD
-	ENCODEDPASSWD=$(echo ${PASSWORD} | sed -e 's/"/\"/g' | sed -e 's/&/%26/g')
+	ENCODEDPASSWD=$(echo ${PASSWORD} | sed -e 's/"/\"/g' |sed -e 's/&/%26/g')
 	echo -en "\n\nInsert Server Alias.\nAllowed chars [a-z0-9] and \"-\" (ex: web-server-1)\nAlias: "
 	read SERVERALIAS
 
