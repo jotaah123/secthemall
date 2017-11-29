@@ -8,7 +8,7 @@ if [ $SSHLOGS -ge 1 ]; then
 		echo -e "\n+ Found SSH logs in ${lfile}"
 		echo -n "+ Do you want to add it on secthemall.conf? [Y/n] "
 		read LOGRES
-		LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes)$" | wc -l);
+		LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes|)$" | wc -l);
 		if [ $LOGRESOUT -ge 1 ]; then
 			CONFOUT[1]=$(echo ${lfile} '"sshd.*password.*"' '"SSH"')
 		fi
@@ -22,7 +22,7 @@ if [ $IPTABLESLOGS -ge 1 ]; then
 		echo "+ WARNING: This could generate a lot of logs."
 		echo -n "+ Do you want to add it on secthemall.conf? [Y/n] "
 		read LOGRES
-		LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes)$" | wc -l);
+		LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes|)$" | wc -l);
 		if [ $LOGRESOUT -ge 1 ]; then
 			CONFOUT[2]=$(echo ${lfile} '"MAC.+SRC.+DST.+PROTO.+DPT"' '"iptables"')
 		fi
@@ -35,7 +35,7 @@ if [ $NGINXLOGS1 -ge 1 ]; then
 		echo -e "\n+ Found HTTP logs in ${lfile}"
 		echo -n "+ Do you want to add it on secthemall.conf? [Y/n] "
 		read LOGRES
-		LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes)$" | wc -l);
+		LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes|)$" | wc -l);
 		if [ $LOGRESOUT -ge 1 ]; then
 			CONFOUT[3]=$(echo ${lfile} '"HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} "' '"HTTP"')
 		fi
@@ -49,7 +49,7 @@ if [ $NGINXLOGS2 -ge 1 ]; then
 		echo -e "\n+ Found HTTP logs in ${lfile}"
 		echo -n "+ Do you want to add it on secthemall.conf? [Y/n] "
 		read LOGRES
-		LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes)$" | wc -l);
+		LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes|)$" | wc -l);
 		if [ $LOGRESOUT -ge 1 ]; then
 			CONFOUT[4]=$(echo ${lfile} '"HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} "' '"HTTP"')
 		fi
@@ -63,7 +63,7 @@ if [ $NGINXLOGS3 -ge 1 ]; then
 		echo -e "\n+ Found HTTP logs in ${lfile}"
 		echo -n "+ Do you want to add it on secthemall.conf? [Y/n] "
 		read LOGRES
-		LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes)$" | wc -l);
+		LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes|)$" | wc -l);
 		if [ $LOGRESOUT -ge 1 ]; then
 			CONFOUT[5]=$(echo ${lfile} '"HTTP\/[0-9\.]+. (4|5)[0-9]{2,2} "' '"HTTP"')
 		fi
@@ -77,7 +77,7 @@ if [ $NETSTATLOG -ge 1 ]; then
 	echo -e "\n+ Found netstat command in ${NETSTATPATH}"
 	echo -n "+ Do you want to add it on secthemall.conf? [Y/n] "
 	read LOGRES
-	LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes)$" | wc -l);
+	LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes|)$" | wc -l);
 	if [ $LOGRESOUT -ge 1 ]; then
 		CONFOUT[6]=$(echo cmd '"netstat"' '"netstat_listen"' '"'${NETSTATPATH}' -ltunp"')
 	fi
@@ -91,7 +91,7 @@ if [ $FAIL2BANLOGS -ge 1 ]; then
 		echo -e "\n+ Found Fail2ban logs in ${lfile}"
 		echo -n "+ Do you want to add it on secthemall.conf? [Y/n] "
 		read LOGRES
-		LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes)$" | wc -l);
+		LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes|)$" | wc -l);
 		if [ $LOGRESOUT -ge 1 ]; then
 			CONFOUT[7]=$(echo ${lfile} '".*fail2ban.*Ban.*"' '"fail2ban"')
 		fi
@@ -102,7 +102,7 @@ fi
 if [ ${#CONFOUT[*]} -ge 1 ]; then
 	echo -en "\n+ I'm going to write ${#CONFOUT[*]} line(s) on secthemall.conf file. Do you want to continue? [Y/n] "
 	read LOGRES
-	LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes)$" | wc -l);
+	LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes|)$" | wc -l);
 	if [ $LOGRESOUT -ge 1 ]; then
 		echo -en "" > ${CDIR}/../conf/secthemall.conf
 		for i in "${CONFOUT[@]}"; do
