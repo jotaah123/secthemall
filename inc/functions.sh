@@ -37,11 +37,11 @@ if [ "${TIMEZONE}" == "" ]; then
 fi
 
 function sdash_encrypt {
-	cat $1 | openssl enc -aes-128-cbc -base64 -A -salt --md md5 pass pass:$PASSPHRASE
+	cat $1 | openssl enc -aes-128-cbc -base64 --md md5 -A -salt pass pass:$PASSPHRASE
 }
 
 function sdash_decrypt {
-	echo $1 | openssl enc -d -aes-128-cbc -base64 -A -salt -md md5 -pass pass:$PASSPHRASE
+	echo $1 | openssl enc -d -aes-128-cbc -base64 --md md5 -A -salt -pass pass:$PASSPHRASE
 }
 
 function getmd5fn {
