@@ -137,6 +137,22 @@ else
 	exit 1
 fi
 
+CHECKSECTHEMALLCHAINTOR=$(iptables -L -n | grep -i 'Chain' | grep 'secthemall-tor' | wc -l)
+if [[ "${CHECKSECTHEMALLCHAINTOR}" == "0" ]]; then
+	labelwa; echo " secthemall Tor blacklist does not exists, creating it..."
+	iptables -N secthemall-tor
+	iptables -I INPUT -j secthemall-tor
+	iptables -I FORWARD -j secthemall-tor
+fi
+
+CHECKSECTHEMALLCHAINTOR=$(iptables -L -n | grep -i 'Chain' | grep 'secthemall-tor' | wc -l)
+if [[ "${CHECKSECTHEMALLCHAINTOR}" == "1" ]]; then
+	labelok; echo " iptables chain secthemall-tor exists."
+else
+	labeler; echo " unable to create secthemall-tor chain."
+	exit 1
+fi
+
 CHECKSECTHEMALLCHAINWL=$(iptables -L -n | grep -i 'Chain' | grep 'secthemall-whitelist' | wc -l)
 if [[ "${CHECKSECTHEMALLCHAINWL}" == "0" ]]; then
 	labelwa; echo " secthemall iptables whitelist does not exists, creating it..."
@@ -197,12 +213,24 @@ ${CDIR}/inc/getupdates.sh
 ${CDIR}/inc/getcountries.sh
 GETUPDATESN=0
 
+TORSN=0
+TORSTAT=$(cat ${CDIR}/conf/tor.stat 2>/dev/null)
+if [[ "${TORSTAT}" == "1" ]]; then
+	${CDIR}/inc/gettorexitnodes.sh
+fi
+
 while true; do
 	if [ $GETUPDATESN -eq 5 ]; then
 		labelin; echo " checking for firewall rules updates..."
 		${CDIR}/inc/getupdates.sh
 		${CDIR}/inc/getcountries.sh
 		GETUPDATESN=0
+	fi
+
+	if [ $TORSN -eq 1440 ]; then
+		labelin; echo " get Tor exit nodes list..."
+		${CDIR}/inc/gettorexitnodes.sh
+		TORSN=0
 	fi
 
 	while read line; do
@@ -227,6 +255,11 @@ while true; do
 	done <${CDIR}/conf/secthemall.conf
 
 	((++GETUPDATESN))
+
+	if [[ "${TORSTAT}" == "1" ]]; then
+		((++TORSN))
+	fi
+
 
 	sleep 5
 done

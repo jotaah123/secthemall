@@ -113,3 +113,13 @@ if [ ${#CONFOUT[*]} -ge 1 ]; then
 else
 	echo -e "\n+ No log sources found. Sorry, you will need to configure it manually."
 fi
+
+echo -e "+ SECTHEMALL can help you on blocking Tor exit nodes IP addresses"
+echo -e "+ More info at: https://secthemall.com/reputation-api/tor"
+echo -n "+ Do you want to block Tor traffic? [Y/n] "
+read LOGRES
+LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes|)$" | wc -l);
+if [ $LOGRESOUT -ge 1 ]; then
+	echo -en 1 > ${CDIR}/../conf/tor.stat
+fi
+

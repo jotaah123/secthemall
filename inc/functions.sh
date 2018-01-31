@@ -145,6 +145,19 @@ function getblacklist {
 	fi
 }
 
+function gettorexitnodes {
+	USERNAME=$(cat ${CDIR}/username)
+	APIKEY=$(cat ${CDIR}/apikey)
+	SALIAS=$(cat ${CDIR}/alias)
+
+	iptables -F secthemall-tor
+	GETBLACKLIST4=$(curl -s -u ${USERNAME}:${APIKEY} "https://secthemall.com/public-list/tor-exit-nodes/iplist?size=3000")
+	for ip in $GETBLACKLIST4; do
+		iptables -I secthemall-tor -s ${ip} -j DROP
+	done;
+	labelok; echo " Tor Blacklist synced."
+}
+
 function getwhitelist {
 	USERNAME=$(cat ${CDIR}/username)
 	APIKEY=$(cat ${CDIR}/apikey)
