@@ -98,6 +98,16 @@ if [ $FAIL2BANLOGS -ge 1 ]; then
 	done
 fi
 
+echo -e "\n+ SECTHEMALL can logs dropped connections from blacklisted IPs"
+echo -e "+ by reading iptables logs stored in /var/log/"
+echo -n "+ Do you want to add it on secthemall.conf? [Y/n] "
+read LOGRES
+LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes|)$" | wc -l);
+if [ $LOGRESOUT -ge 1 ]; then
+	CONFOUT[8]=$(echo cmd '"logdrop"' '"secthemall_logdrop"' '"egrep -s SECTHEMALL.logdrop /var/log/*"')
+fi
+
+
 
 if [ ${#CONFOUT[*]} -ge 1 ]; then
 	echo -en "\n+ I'm going to write ${#CONFOUT[*]} line(s) on secthemall.conf file. Do you want to continue? [Y/n] "

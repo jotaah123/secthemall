@@ -45,7 +45,7 @@ for uout in $UPDATESOUT; do
 			if [ $ISIPV4 -ge 1 ]; then
 				CHECKIFIPEXISTS=$(iptables -L secthemall-blacklist -n | grep -w "${ip}" | wc -l)
 				if [ $CHECKIFIPEXISTS -eq 0 ]; then
-					iptables -I secthemall-blacklist -s ${ip} -j DROP
+					iptables -I secthemall-blacklist -s ${ip} -j secthemall-logdrop
 				else
 					labelwa; echo " IPv4 ${ip} already in blacklist."
 				fi
@@ -83,10 +83,10 @@ for uout in $UPDATESOUT; do
 			if [ $ISIPV4 -ge 1 ]; then
 				CHECKIFIPEXISTS=$(iptables -L secthemall-blacklist -n | grep -w "${ip}" | wc -l)
 				if [ $CHECKIFIPEXISTS -ge 1 ]; then
-					iptables -D secthemall-blacklist -s ${ip} -j DROP > /dev/null 2>&1
+					iptables -D secthemall-blacklist -s ${ip} -j secthemall-logdrop > /dev/null 2>&1
 				else
 					labelwa; echo " IPv4 ${ip} does not seem to be blacklisted, trying to remove it anyway."
-					iptables -D secthemall-blacklist -s ${ip} -j DROP > /dev/null 2>&1
+					iptables -D secthemall-blacklist -s ${ip} -j secthemall-logdrop > /dev/null 2>&1
 				fi
 			fi
 		done
@@ -131,7 +131,7 @@ for uout in $UPDATESOUT; do
 			if [ $ISIPV6 -ge 1 ]; then
 				CHECKIFIPEXISTS=$(ip6tables -L secthemall-blacklist -n | grep -w "${ip}" | wc -l)
 				if [ $CHECKIFIPEXISTS -eq 0 ]; then
-					ip6tables -I secthemall-blacklist -s ${ip} -j DROP
+					ip6tables -I secthemall-blacklist -s ${ip} -j secthemall-logdrop
 				else
 					labelwa; echo " IPv6 ${ip} already in blacklist."
 				fi
@@ -169,10 +169,10 @@ for uout in $UPDATESOUT; do
 			if [ $ISIPV6 -ge 1 ]; then
 				CHECKIFIPEXISTS=$(ip6tables -L secthemall-blacklist -n | grep -w "${ip}" | wc -l)
 				if [ $CHECKIFIPEXISTS -ge 1 ]; then
-					ip6tables -D secthemall-blacklist -s ${ip} -j DROP > /dev/null 2>&1
+					ip6tables -D secthemall-blacklist -s ${ip} -j secthemall-logdrop > /dev/null 2>&1
 				else
 					labelwa; echo " IPv6 ${ip} does not seem to be blacklisted, trying to remove it anyway."
-					ip6tables -D secthemall-blacklist -s ${ip} -j DROP > /dev/null 2>&1
+					ip6tables -D secthemall-blacklist -s ${ip} -j secthemall-logdrop > /dev/null 2>&1
 				fi
 			fi
 		done

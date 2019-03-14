@@ -117,7 +117,7 @@ function parsecmd {
 		exit 0
 	fi
 
-	curl -d "a=writelogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&type=${logptye}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" -d @${CDIR}/../tmp/e${logfile//\//_} "https://wl.secthemall.com/api/v1/"
+	curl -s -d "a=writelogs&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&type=${logptye}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" -d @${CDIR}/../tmp/e${logfile//\//_} "https://wl.secthemall.com/api/v1/"
 	labelok; echo -n " Logs sent for file "; clr_blue "${logfile}"
 	rm -rf ${CDIR}/../tmp/t${logfile//\//_}
 	rm -rf ${CDIR}/../tmp/e${logfile//\//_}
@@ -131,7 +131,7 @@ function getblacklist {
 	iptables -F secthemall-blacklist
 	GETBLACKLIST4=$(curl -s -d "a=getmyblacklist&ipversion=ipv4&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" "https://secthemall.com/api/v1/")
 	for ip in $GETBLACKLIST4; do
-		iptables -I secthemall-blacklist -s ${ip} -j DROP
+		iptables -I secthemall-blacklist -s ${ip} -j secthemall-logdrop
 	done;
 	labelok; echo " Blacklist v4 synced."
 
@@ -139,7 +139,7 @@ function getblacklist {
 		ip6tables -F secthemall-blacklist > /dev/null 2>&1
 		GETBLACKLIST6=$(curl -s -d "a=getmyblacklist&ipversion=ipv6&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&alias=${SALIAS}&hostname=${MYHOSTNAME}&ipaddr=${MYIPADDR}" "https://secthemall.com/api/v1/")
 		for ip in $GETBLACKLIST6; do
-			ip6tables -I secthemall-blacklist -s ${ip} -j DROP > /dev/null 2>&1
+			ip6tables -I secthemall-blacklist -s ${ip} -j secthemall-logdrop > /dev/null 2>&1
 		done;
 		labelok; echo " Blacklist v6 synced."
 	fi
@@ -153,7 +153,7 @@ function gettorexitnodes {
 	iptables -F secthemall-tor
 	GETBLACKLIST4=$(curl -s -u ${USERNAME}:${APIKEY} "https://secthemall.com/public-list/tor-exit-nodes/iplist?size=3000")
 	for ip in $GETBLACKLIST4; do
-		iptables -I secthemall-tor -s ${ip} -j DROP
+		iptables -I secthemall-tor -s ${ip} -j secthemall-logdrop
 	done;
 	labelok; echo " Tor Blacklist synced."
 }

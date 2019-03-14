@@ -120,6 +120,13 @@ else
 	labelok; echo -en " Configured TimeZone: "; clr_blueb clr_white " ${TIMEZONE} ";
 fi
 
+CHECKSECTHEMALLCHAINLOGDROP=$(iptables -L -n | grep -i 'Chain' | grep 'secthemall-logdrop' | wc -l)
+if [[ "${CHECKSECTHEMALLCHAINLOGDROP}" == "0" ]]; then
+	labelwa; echo " secthemall iptables logdrop does not exists, creating it..."
+	iptables -N secthemall-logdrop
+	iptables -A secthemall-logdrop -j LOG --log-level info --log-prefix "SECTHEMALL logdrop: "
+	iptables -A secthemall-logdrop -j DROP
+fi
 
 CHECKSECTHEMALLCHAINBL=$(iptables -L -n | grep -i 'Chain' | grep 'secthemall-blacklist' | wc -l)
 if [[ "${CHECKSECTHEMALLCHAINBL}" == "0" ]]; then
@@ -170,6 +177,14 @@ else
 fi
 
 if type "ip6tables" > /dev/null; then
+	CHECKSECTHEMALLCHAINLOGDROP6=$(ip6tables -L -n | grep -i 'Chain' | grep 'secthemall-logdrop' | wc -l)
+	if [[ "${CHECKSECTHEMALLCHAINLOGDROP6}" == "0" ]]; then
+		labelwa; echo " secthemall ip6tables logdrop does not exists, creating it..."
+		ip6tables -N secthemall-logdrop
+		ip6tables -A secthemall-logdrop -j LOG --log-level info --log-prefix "SECTHEMALL logdrop: "
+		ip6tables -A secthemall-logdrop -j DROP
+	fi
+
 	CHECKSECTHEMALLCHAINBL6=$(ip6tables -L -n | grep -i 'Chain' | grep 'secthemall-blacklist' | wc -l)
 	if [[ "${CHECKSECTHEMALLCHAINBL6}" == "0" ]]; then
 		labelwa; echo " secthemall ip6tables blacklist does not exists, creating it..."

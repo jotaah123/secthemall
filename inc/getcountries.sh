@@ -22,7 +22,7 @@ function get_countries_blocks {
 	iptables -F secthemall-countries
 	UPDATESOUT=$(curl -s -A "${STAVERSION}" -d "a=getcountries&tz=${TIMEZONE}&username=${USERNAME}&apikey=${APIKEY}&alias=${SALIAS}" 'https://secthemall.com/api/v1/')
 	for ip in $UPDATESOUT; do
-		iptables -I secthemall-countries -s ${ip} -j DROP
+		iptables -I secthemall-countries -s ${ip} -j secthemall-logdrop
 	done;
 	labelok; echo " Countries Blacklist v4 synced."
 }
