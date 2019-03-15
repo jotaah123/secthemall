@@ -160,6 +160,22 @@ else
 	exit 1
 fi
 
+CHECKSECTHEMALLCHAINSHODAN=$(iptables -L -n | grep -i 'Chain' | grep 'secthemall-shodan' | wc -l)
+if [[ "${CHECKSECTHEMALLCHAINSHODAN}" == "0" ]]; then
+	labelwa; echo " secthemall Shodan blacklist does not exists, creating it..."
+	iptables -N secthemall-shodan
+	iptables -I INPUT -j secthemall-shodan
+	iptables -I FORWARD -j secthemall-shodan
+fi
+
+CHECKSECTHEMALLCHAINSHODAN=$(iptables -L -n | grep -i 'Chain' | grep 'secthemall-shodan' | wc -l)
+if [[ "${CHECKSECTHEMALLCHAINSHODAN}" == "1" ]]; then
+	labelok; echo " iptables chain secthemall-shodan exists."
+else
+	labeler; echo " unable to create secthemall-shodan chain."
+	exit 1
+fi
+
 CHECKSECTHEMALLCHAINWL=$(iptables -L -n | grep -i 'Chain' | grep 'secthemall-whitelist' | wc -l)
 if [[ "${CHECKSECTHEMALLCHAINWL}" == "0" ]]; then
 	labelwa; echo " secthemall iptables whitelist does not exists, creating it..."
@@ -234,6 +250,12 @@ if [[ "${TORSTAT}" == "1" ]]; then
 	${CDIR}/inc/gettorexitnodes.sh
 fi
 
+SHODANSN=0
+SHODANSTAT=$(cat ${CDIR}/conf/shodan.stat 2>/dev/null)
+if [[ "${SHODANSTAT}" == "1" ]]; then
+	${CDIR}/inc/getshodan.sh
+fi
+
 while true; do
 	if [ $GETUPDATESN -eq 5 ]; then
 		labelin; echo " checking for firewall rules updates..."
@@ -247,6 +269,9 @@ while true; do
 		${CDIR}/inc/gettorexitnodes.sh
 		TORSN=0
 	fi
+
+	labelin; echo " check Shodan crawlers list..."
+	${CDIR}/inc/getshodan.sh
 
 	while read line; do
 		REGEXPFILE='^(/[^[:space:]]+) \"(.+)\" (.+)'

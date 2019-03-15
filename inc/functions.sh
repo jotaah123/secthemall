@@ -158,6 +158,34 @@ function gettorexitnodes {
 	labelok; echo " Tor Blacklist synced."
 }
 
+function getshodancrawlers {
+	USERNAME=$(cat ${CDIR}/username)
+	APIKEY=$(cat ${CDIR}/apikey)
+	SALIAS=$(cat ${CDIR}/alias)
+
+	LASTID=$(cat ${CDIR}/../stat/shodan_last_id 2>/dev/null)
+	STALASTID=$(curl -s -u ${USERNAME}:${APIKEY} 'https://secthemall.com/public-list/shodan-crawlers/iplist?lastid=true')
+
+	if [[ "${LASTID}" != "${STALASTID}" ]]; then
+		iptables -F secthemall-shodan
+		GETBLACKLIST4=$(curl -s -u ${USERNAME}:${APIKEY} "https://secthemall.com/public-list/shodan-crawlers/iplist?size=3000" | sort | uniq)
+
+		SHODANSYNC=$(echo $GETBLACKLIST4 | grep "warning" | wc -l)
+
+		if [[ $SHODANSYNC -gt 0 ]]; then
+			labelok; echo " Shodan Blacklist sync in progress, try later."
+		else
+			for ip in $GETBLACKLIST4; do
+				iptables -I secthemall-shodan -s ${ip} -j secthemall-logdrop
+			done;
+			labelok; echo " Shodan Blacklist synced."
+			echo -n "${STALASTID}" > ${CDIR}/../stat/shodan_last_id
+		fi
+	else
+		labelok; echo " Shodan Blacklist already up-to-date."
+	fi
+}
+
 function getwhitelist {
 	USERNAME=$(cat ${CDIR}/username)
 	APIKEY=$(cat ${CDIR}/apikey)

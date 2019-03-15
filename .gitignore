@@ -1,6 +1,7 @@
 conf/client.pid
 conf/parser.conf
 conf/secthemall.conf
+conf/*.stat
 stat/*
 tmp/*
 inc/alias

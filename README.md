@@ -15,11 +15,6 @@ With SECTHEMALL you'll block **Brute Force Attacks, Port Scans, Web Vulnerabilit
 
 <br>
 
-# Are you a PHP developer?
-Visit [SECTHEMALL PHP-Security](https://github.com/SECTHEMALL/php-security)
-
-<br>
-
 # Index
 - [Requirements](#requirements)
 - [Installation](#installation)

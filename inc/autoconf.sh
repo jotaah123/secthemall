@@ -133,3 +133,11 @@ if [ $LOGRESOUT -ge 1 ]; then
 	echo -en 1 > ${CDIR}/../conf/tor.stat
 fi
 
+echo -e "\n+ SECTHEMALL can help you on blocking Shodan crawlers"
+echo -n "+ Do you want to block Shodan traffic? [Y/n] "
+read LOGRES
+LOGRESOUT=$(echo "${LOGRES}" | egrep -i "^(y|yes|)$" | wc -l);
+if [ $LOGRESOUT -ge 1 ]; then
+	echo -en 1 > ${CDIR}/../conf/shodan.stat
+fi
+
